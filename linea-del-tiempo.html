@@ -1,0 +1,808 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reyes de Israel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0c0c0c; --s1:#141414; --s2:#1b1b1b; --s3:#242424; --bd:#2a2a2a;
+  --text:#f6f2ee; --muted:#a39d97; --faint:#6e6862;
+  --or:#ff5b1f; --or2:#ff8a3d; --red:#e1301c; --maroon:#4a140b;
+  --unido:#f3e9dc; --norte:#ff5b1f; --sur:#ffb347; --evento:#ff3d2e;
+  --bueno:#4ade80; --mixto:#facc15; --malo:#f43f5e;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+html,body{margin:0}
+body{
+  background:
+    radial-gradient(900px 600px at -10% 10%,rgba(255,91,31,.16),transparent 60%),
+    radial-gradient(900px 700px at 110% 60%,rgba(225,48,28,.12),transparent 60%),
+    var(--bg);
+  color:var(--text);font-family:"Plus Jakarta Sans",system-ui,sans-serif;font-size:15px;line-height:1.5;min-height:100vh;overflow-x:hidden;
+}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:inherit}
+.wrap{max-width:1200px;margin:0 auto;padding:0 16px}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;margin-top:20px;border-radius:32px;overflow:hidden;min-height:540px;padding:26px 34px 30px;display:flex;flex-direction:column;
+  background:
+    radial-gradient(700px 520px at 18% 30%,#ff6a2b 0%,rgba(255,91,31,.0) 70%),
+    radial-gradient(600px 500px at 60% 10%,#f0431f 0%,transparent 70%),
+    linear-gradient(160deg,#ff5b1f 0%,#c72b14 38%,#5a160b 72%,#1a0c08 100%);}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.35));pointer-events:none}
+nav{position:relative;z-index:2;display:flex;align-items:center;gap:26px}
+.brand{font-weight:800;font-size:18px;letter-spacing:-.3px;margin-right:auto}
+nav a{font-size:13.5px;color:rgba(255,255,255,.85);text-decoration:none;cursor:pointer}
+nav a:hover{color:#fff}
+.pill{display:inline-flex;align-items:center;gap:10px;background:#fff;color:#111;border:none;border-radius:999px;padding:5px 5px 5px 16px;font-size:13px;font-weight:600;cursor:pointer;transition:transform .2s,box-shadow .2s}
+.pill .ar{width:28px;height:28px;border-radius:50%;background:var(--or);color:#fff;display:grid;place-items:center;font-size:15px}
+.pill:hover{transform:translateY(-1px);box-shadow:0 10px 30px -8px rgba(255,91,31,.7)}
+.pill.or{background:var(--or);color:#fff}
+.pill.or .ar{background:#fff;color:var(--or)}
+.crown{position:absolute;right:-40px;top:40px;width:560px;max-width:70%;opacity:.16;z-index:1;pointer-events:none}
+.hero-main{position:relative;z-index:2;flex:1;display:grid;grid-template-columns:1.3fr 1fr;align-items:center;gap:30px;padding:30px 0}
+.hey{font-size:22px;font-weight:600;margin:0 0 8px}
+.hero h1{font-size:clamp(54px,9vw,112px);line-height:.92;letter-spacing:-3px;font-weight:800;margin:0}
+.hero-side h2{font-size:22px;font-weight:700;line-height:1.25;margin:0 0 12px;letter-spacing:-.3px}
+.hero-side p{font-size:13.5px;color:rgba(255,255,255,.72);margin:0;max-width:330px}
+.eras{position:relative;z-index:2;display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.era{background:none;border:none;text-align:left;padding:10px 0 0;cursor:pointer;border-top:1px solid rgba(255,255,255,.22);transition:border-color .2s}
+.era b{display:block;font-size:12px;font-weight:700}
+.era b::before{content:"#";color:#ffb08a}
+.era span{font-size:13px;color:rgba(255,255,255,.85)}
+.era small{display:block;font-size:11.5px;color:rgba(255,255,255,.55)}
+.era:hover{border-color:#fff}
+
+.stats{margin-top:-30px;padding:58px 34px 30px;background:var(--s1);border-radius:0 0 32px 32px;display:flex;align-items:center;gap:30px;flex-wrap:wrap}
+.stats .lbl{font-size:12px;font-weight:600;color:#ddd;max-width:150px;line-height:1.3}
+.stat{display:flex;align-items:center;gap:10px;font-weight:700;font-size:17px;letter-spacing:-.3px;flex:1;min-width:150px}
+.stat i{width:22px;height:22px;border-radius:50%;flex:none}
+.stat small{display:block;font-size:11.5px;color:var(--faint);font-weight:500;letter-spacing:0}
+
+/* ---------- Intro ---------- */
+.intro{display:grid;grid-template-columns:1fr 1fr;gap:40px;padding:90px 0 34px;align-items:end}
+.kicker{color:var(--or);font-weight:600;font-size:16px;margin:0 0 10px}
+.intro h2{font-size:clamp(34px,4.6vw,52px);line-height:1.05;letter-spacing:-1.5px;margin:0;font-weight:800}
+.intro p.lead{font-size:18px;font-weight:600;line-height:1.4;margin:0 0 18px}
+.controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.chip{border:1px solid var(--bd);background:var(--s1);border-radius:999px;padding:7px 14px;cursor:pointer;color:var(--muted);font-size:13px;font-weight:600;transition:.2s}
+.chip:hover{color:var(--text);border-color:#444}
+.chip[aria-pressed="true"]{background:var(--text);color:#111;border-color:var(--text)}
+.chip .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:1px}
+.search{background:var(--s1);border:1px solid var(--bd);border-radius:999px;padding:7px 16px;min-width:190px;outline:none;font-size:13px}
+.search:focus{border-color:var(--or)}
+
+/* ---------- Timeline ---------- */
+.tl-shell{position:relative}
+.tl-shell::before,.tl-shell::after{content:"";position:absolute;top:0;bottom:0;width:60px;z-index:4;pointer-events:none}
+.tl-shell::before{left:0;background:linear-gradient(90deg,var(--bg),transparent)}
+.tl-shell::after{right:0;background:linear-gradient(-90deg,var(--bg),transparent)}
+.scroller{overflow-x:auto;overflow-y:hidden;cursor:grab;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.scroller::-webkit-scrollbar{display:none}
+.scroller.dragging{cursor:grabbing;user-select:none}
+.stage{position:relative}
+.stage svg{position:absolute;inset:0;overflow:visible}
+.base{fill:none;stroke:#3a3633;stroke-width:3;stroke-linecap:round}
+.draw{stroke-dasharray:1;stroke-dashoffset:1;animation:draw 2.4s cubic-bezier(.6,.1,.2,1) forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.glow{fill:none;stroke-width:3.5;stroke-linecap:round;opacity:0;transition:opacity .35s}
+.glow.unido{stroke:var(--unido);filter:drop-shadow(0 0 6px var(--unido))}
+.glow.norte{stroke:var(--norte);filter:drop-shadow(0 0 7px var(--norte))}
+.glow.sur{stroke:var(--sur);filter:drop-shadow(0 0 7px var(--sur))}
+.spot path{fill:none;stroke-width:3.5;stroke-linecap:round}
+.spot{transition:opacity .3s;opacity:0}
+.stage.hover .spot{opacity:1}
+.stage.hl-unido .glow.unido,.stage.hl-norte .glow.norte,.stage.hl-norte .glow.unido,
+.stage.hl-sur .glow.sur,.stage.hl-sur .glow.unido,.stage.hl-evento .glow{opacity:1}
+.lane-wrap:hover .glow{opacity:1}
+.conn{fill:none;stroke:#34302d;stroke-width:1.5;transition:stroke .25s}
+.dot{fill:var(--bg);stroke-width:2.5;transition:fill .25s,r .25s}
+.conn.on{stroke:var(--lc)} .dot.on{fill:var(--lc)}
+.tick{stroke:#2f2b28;stroke-width:1}
+.tick-l{fill:var(--faint);font-size:11px;font-weight:600;font-family:inherit}
+.ev-line{stroke:var(--evento);stroke-width:1.5;stroke-dasharray:3 4;opacity:.55}
+.lane-l{font-size:11px;font-weight:800;letter-spacing:2px;font-family:inherit}
+.cap{stroke-width:3}
+
+.card{position:absolute;display:flex;align-items:center;gap:12px;background:var(--s2);border:1px solid var(--bd);border-radius:20px;padding:10px 14px 10px 10px;
+  cursor:pointer;transition:transform .28s cubic-bezier(.3,.7,.3,1.2),box-shadow .28s;box-shadow:0 0 0 rgba(0,0,0,0);z-index:2;outline:none;
+  --lc:var(--or)}
+.card.k-unido{--lc:var(--unido)} .card.k-norte{--lc:var(--norte)} .card.k-sur{--lc:var(--sur)}
+.card:hover,.card:focus-visible{transform:scale(1.07);z-index:6;
+  box-shadow:0 0 0 1px color-mix(in srgb,var(--lc) 60%,transparent),0 0 34px -4px color-mix(in srgb,var(--lc) 70%,transparent),0 24px 50px -16px color-mix(in srgb,var(--lc) 80%,transparent)}
+.bub{position:relative;flex:none;width:var(--bs);height:var(--bs);border-radius:50%;padding:3px;background:conic-gradient(from 200deg,var(--lc),color-mix(in srgb,var(--lc) 25%,#000),var(--lc))}
+.bub .img{width:100%;height:100%;border-radius:50%;overflow:hidden;background:#0f0f0f;display:grid;place-items:center}
+.bub img{width:100%;height:100%;object-fit:cover;display:block}
+.ph{font-size:8.5px;line-height:1.2;color:var(--faint);text-align:center;padding:6px}
+.ct{min-width:0;flex:1}
+.no{font-size:11px;font-weight:700;color:var(--lc)}
+.mt+.mt{color:var(--faint)}
+.ct h3{margin:1px 0 2px;font-size:16.5px;font-weight:800;letter-spacing:-.3px;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mt{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.jd{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:5px;vertical-align:1px}
+
+.evp{position:absolute;display:flex;align-items:center;gap:10px;padding:8px 14px 8px 10px;border-radius:999px;cursor:pointer;z-index:3;
+  background:linear-gradient(135deg,#2a0f09,#1b0d0a);border:1px solid #5b2216;transition:transform .28s cubic-bezier(.3,.7,.3,1.2),box-shadow .28s;outline:none}
+.evp:hover,.evp:focus-visible{transform:scale(1.07);z-index:6;box-shadow:0 0 0 1px rgba(255,61,46,.6),0 0 34px -4px rgba(255,61,46,.7),0 20px 40px -14px rgba(255,61,46,.8)}
+.evp .pulse{flex:none;width:34px;height:34px;border-radius:50%;background:radial-gradient(circle,var(--evento) 0 30%,rgba(255,61,46,.25) 31% 100%);animation:pulse 2.4s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,61,46,.45)}50%{box-shadow:0 0 0 8px rgba(255,61,46,0)}}
+.evp b{display:block;font-size:12px;color:#ff8a70;font-weight:800}
+.evp .et{display:block;font-size:12.5px;font-weight:700;line-height:1.15;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.card.dim,.evp.dim{opacity:.13;filter:grayscale(1)}
+.card.match{box-shadow:0 0 0 2px var(--lc)}
+
+.admin-edit{position:absolute;top:-9px;right:10px;display:none;background:var(--or);color:#fff;border-radius:999px;padding:1px 9px;font-size:10.5px;font-weight:700}
+body.admin .admin-edit{display:block}
+
+.tl-bar{display:flex;align-items:center;gap:16px;margin:18px auto 0}
+.round{width:44px;height:44px;border-radius:50%;border:1px solid var(--bd);background:var(--s1);cursor:pointer;font-size:18px;transition:.2s;flex:none}
+.round:hover{background:var(--or);border-color:var(--or)}
+.track{flex:1;height:4px;background:var(--s3);border-radius:4px;position:relative;overflow:hidden}
+.track i{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,var(--or),var(--sur));border-radius:4px;width:0}
+.now{min-width:190px;text-align:right}
+.now b{font-size:20px;font-weight:800;letter-spacing:-.5px}
+.now small{display:block;color:var(--faint);font-size:12px}
+.hint{color:var(--faint);font-size:12px;margin-top:10px}
+.legend{display:flex;gap:18px;flex-wrap:wrap;color:var(--muted);font-size:12.5px;margin-top:26px}
+.legend span{display:inline-flex;align-items:center;gap:7px}
+.legend i{width:9px;height:9px;border-radius:50%}
+footer{color:var(--faint);font-size:12.5px;padding:60px 16px 40px;text-align:center}
+footer a{cursor:pointer;text-decoration:underline}
+
+/* ---------- Modal ---------- */
+dialog{border:none;padding:0;background:transparent;color:var(--text);max-width:min(940px,calc(100vw - 24px));width:100%}
+dialog::backdrop{background:rgba(0,0,0,.72);backdrop-filter:blur(6px)}
+dialog[open] .sheet{animation:pop .3s cubic-bezier(.3,.7,.3,1.15)}
+@keyframes pop{from{transform:scale(.96);opacity:0}}
+.sheet{position:relative;background:var(--s1);border:1px solid var(--bd);border-radius:28px;overflow:hidden;max-height:calc(100vh - 32px);overflow-y:auto}
+.detail{display:grid;grid-template-columns:340px 1fr}
+.pic{position:relative;min-height:380px;display:grid;place-items:center;
+  background:radial-gradient(400px 300px at 30% 20%,#ff6a2b,transparent 70%),linear-gradient(160deg,#ff5b1f,#a82410 55%,#2a0d07)}
+.pic.k-sur{background:radial-gradient(400px 300px at 30% 20%,#ffc56b,transparent 70%),linear-gradient(160deg,#ffb347,#c4670f 55%,#2b1405)}
+.pic.k-unido{background:radial-gradient(400px 300px at 30% 20%,#fff,transparent 70%),linear-gradient(160deg,#efe1cf,#9a7f61 55%,#241a10)}
+.pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.pic .ph{font-size:13px;color:rgba(255,255,255,.85);width:180px;height:180px;border-radius:50%;border:2px dashed rgba(255,255,255,.5);display:grid;place-items:center}
+.body{padding:34px 34px 20px}
+.body .kick{font-size:12.5px;font-weight:700;color:var(--lc)}
+.body h2{font-size:clamp(36px,5vw,54px);line-height:.95;letter-spacing:-2px;margin:8px 0 18px;font-weight:800}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:0 0 20px}
+.fact{background:var(--s2);border:1px solid var(--bd);border-radius:14px;padding:10px 12px}
+.fact small{display:block;color:var(--faint);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.6px}
+.fact span{font-size:13.5px;font-weight:600}
+.pts{list-style:none;padding:0;margin:0;counter-reset:p}
+.pts li{counter-increment:p;display:grid;grid-template-columns:36px 1fr;padding:9px 0;border-top:1px solid var(--bd);font-size:14px}
+.pts li::before{content:"#" counter(p,decimal-leading-zero);color:var(--lc);font-weight:700;font-size:12px;padding-top:2px}
+.notes{margin-top:16px;padding:14px 16px;border-radius:16px;background:color-mix(in srgb,var(--lc) 10%,var(--s2));border:1px solid color-mix(in srgb,var(--lc) 30%,transparent);white-space:pre-wrap;font-size:14px}
+.notes b{display:block;font-size:11px;letter-spacing:.6px;text-transform:uppercase;color:var(--lc);margin-bottom:4px}
+.close{position:absolute;top:14px;right:14px;width:38px;height:38px;border-radius:50%;border:none;background:rgba(0,0,0,.55);cursor:pointer;z-index:3;font-size:16px;color:#fff}
+.close:hover{background:var(--or)}
+.nav{display:flex;justify-content:space-between;gap:8px;padding:6px 34px 28px}
+.nbtn{border:1px solid var(--bd);background:var(--s2);border-radius:999px;padding:8px 16px;cursor:pointer;font-size:13px;font-weight:600;transition:.2s}
+.nbtn:hover:not([disabled]){border-color:var(--or);color:#fff;background:var(--or)}
+.nbtn[disabled]{opacity:.3;cursor:default}
+
+/* ---------- Admin ---------- */
+.adminbar{display:none;position:sticky;top:0;z-index:20;background:rgba(20,20,20,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--bd);padding:10px 16px}
+body.admin .adminbar{display:block}
+.adminbar .in{max-width:1200px;margin:auto;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.adminbar strong{margin-right:auto;color:var(--or);font-size:14px}
+.btn{border:1px solid var(--bd);background:var(--s2);border-radius:999px;padding:7px 14px;cursor:pointer;font-size:13px;font-weight:600}
+.btn:hover{border-color:#555}
+.btn.primary{background:var(--or);border-color:var(--or);color:#fff}
+.btn.primary:hover{background:#ff6d36}
+.btn.danger{border-color:#5a2020;color:#ff9b9b}
+.form{padding:30px 32px}
+.form h2{font-size:34px;letter-spacing:-1px;margin:0 0 18px;font-weight:800}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field{display:flex;flex-direction:column;gap:5px;margin-bottom:12px}
+.field label{font-size:12px;color:var(--muted);font-weight:600}
+.field input,.field select,.field textarea{background:var(--bg);border:1px solid var(--bd);border-radius:12px;padding:10px 12px;outline:none}
+.field textarea{min-height:90px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--or)}
+.imgedit{display:flex;gap:18px;align-items:center;margin-bottom:18px}
+.imgedit .bub{--bs:110px}
+.actions{display:flex;gap:8px;justify-content:space-between;flex-wrap:wrap;margin-top:8px}
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(10px);background:var(--or);color:#fff;font-weight:600;padding:10px 20px;border-radius:999px;opacity:0;transition:.25s;pointer-events:none;z-index:50}
+.toast.on{opacity:1;transform:translateX(-50%)}
+
+/* ---------- Responsive ---------- */
+@media (max-width:860px){
+  .hero{padding:20px 20px 24px;min-height:0;border-radius:26px}
+  nav a.lnk{display:none}
+  .hero-main{grid-template-columns:1fr;gap:18px;padding:40px 0 30px}
+  .hero h1{letter-spacing:-2px}
+  .eras{grid-template-columns:1fr 1fr}
+  .stats{padding:52px 20px 24px;gap:18px;border-radius:0 0 26px 26px}
+  .intro{grid-template-columns:1fr;gap:20px;padding:60px 0 24px}
+  .detail{grid-template-columns:1fr}
+  .pic{min-height:260px}
+  .body{padding:24px 22px 14px}
+  .nav{padding:6px 22px 22px}
+  .grid2{grid-template-columns:1fr}
+  .now{min-width:0}
+  .now b{font-size:16px}
+  .tl-shell::before,.tl-shell::after{width:24px}
+}
+</style>
+</head>
+<body>
+
+<div class="adminbar">
+  <div class="in">
+    <strong>● Modo administrador</strong>
+    <button class="btn primary" id="btnAdd">+ Agregar</button>
+    <button class="btn" id="btnExport" title="Guardar copia de seguridad de todos los datos">Exportar datos</button>
+    <button class="btn" id="btnImport">Importar datos</button>
+    <button class="btn" id="btnDownload" title="Descarga una página HTML con todo incluido, lista para compartir">Descargar página final</button>
+    <button class="btn danger" id="btnReset">Restaurar original</button>
+    <button class="btn" id="btnExit">Salir</button>
+    <input type="file" id="importFile" accept="application/json,.json" hidden>
+  </div>
+</div>
+
+<div class="wrap">
+  <section class="hero">
+    <svg class="crown" viewBox="0 0 200 160" fill="none" stroke="#fff" stroke-width="3" stroke-linejoin="round" aria-hidden="true">
+      <path d="M20 120 L10 40 L60 85 L100 20 L140 85 L190 40 L180 120 Z"/>
+      <path d="M22 135 H178 V150 H22 Z"/>
+      <circle cx="10" cy="36" r="7"/><circle cx="100" cy="15" r="8"/><circle cx="190" cy="36" r="7"/>
+      <circle cx="60" cy="110" r="6"/><circle cx="100" cy="104" r="8"/><circle cx="140" cy="110" r="6"/>
+    </svg>
+    <nav>
+      <span class="brand">Reyes de Israel</span>
+      <a class="lnk" data-jump="top">Inicio</a>
+      <a class="lnk" data-jump="linea">Línea</a>
+      <a class="lnk" data-jump="eras">Reinos</a>
+      <button class="pill" data-jump="linea">Ver la línea <span class="ar">→</span></button>
+    </nav>
+    <div class="hero-main">
+      <div>
+        <p class="hey">Del trono al exilio,</p>
+        <h1>Los Reyes<br>de Israel</h1>
+      </div>
+      <div class="hero-side">
+        <h2>Un reino, dos caminos y tres deportaciones.</h2>
+        <p>Desde Saúl, el primer rey, hasta la caída de Jerusalén en 586 a.C. Recorré cada reinado, sus fechas y lo que la Biblia dice de él.</p>
+      </div>
+    </div>
+    <div class="eras" id="eras">
+      <button class="era" data-era="unido"><b>01</b><span>Reino Unido</span><small>1050–931 a.C.</small></button>
+      <button class="era" data-era="division"><b>02</b><span>División del reino</span><small>931 a.C.</small></button>
+      <button class="era" data-era="samaria"><b>03</b><span>Caída de Samaria</span><small>722 a.C.</small></button>
+      <button class="era" data-era="exilio"><b>04</b><span>Tres deportaciones</span><small>606 · 597 · 586 a.C.</small></button>
+    </div>
+  </section>
+  <div class="stats" id="stats"></div>
+
+  <section class="intro" id="linea">
+    <div>
+      <p class="kicker">Detrás de la historia</p>
+      <h2>Una línea que se parte en dos reinos</h2>
+    </div>
+    <div>
+      <p class="lead">Arrastrá la línea o usá las flechas. Tocá cualquier rey para ver su historia completa.</p>
+      <div class="controls" role="group" aria-label="Filtros">
+        <button class="chip" data-f="todos" aria-pressed="true">Todos</button>
+        <button class="chip" data-f="unido" aria-pressed="false"><span class="dot" style="background:var(--unido)"></span>Unido</button>
+        <button class="chip" data-f="norte" aria-pressed="false"><span class="dot" style="background:var(--norte)"></span>Norte</button>
+        <button class="chip" data-f="sur" aria-pressed="false"><span class="dot" style="background:var(--sur)"></span>Sur</button>
+        <button class="chip" data-f="evento" aria-pressed="false"><span class="dot" style="background:var(--evento)"></span>Sucesos</button>
+        <input class="search" id="q" type="search" placeholder="Buscar rey o suceso…">
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="tl-shell">
+  <div class="scroller" id="scroller"><div class="stage" id="stage"></div></div>
+</div>
+
+<div class="wrap">
+  <div class="tl-bar">
+    <button class="round" id="prevBtn" aria-label="Anterior">←</button>
+    <button class="round" id="nextBtn" aria-label="Siguiente">→</button>
+    <div class="track"><i id="prog"></i></div>
+    <div class="now"><b id="nowYear">1050 a.C.</b><small id="nowEra">Reino Unido</small></div>
+  </div>
+  <div class="legend">
+    <span><i style="background:var(--bueno)"></i>Agradó a Dios</span>
+    <span><i style="background:var(--mixto)"></i>Bueno con reservas</span>
+    <span><i style="background:var(--malo)"></i>Hizo lo malo</span>
+  </div>
+</div>
+
+<footer>Línea del tiempo bíblica · <a id="adminLink">administrar</a></footer>
+
+<dialog id="dlg"><div class="sheet" id="sheet"></div></dialog>
+<div class="toast" id="toast"></div>
+
+<script id="seed" type="application/json">
+{"updatedAt": 0, "items": [{"id": "u-saul", "tipo": "unido", "nombre": "Saúl", "inicio": 1050, "fecha": "1050–1010 a.C.", "duracion": "40 años", "texto": "1 Samuel 9—31; Hechos 13:21", "puntos": ["Fue el primer rey de Israel, de la tribu de Benjamín, ungido por el profeta Samuel.", "Comenzó con humildad y obtuvo victorias sobre los amonitas y los filisteos.", "Desobedeció a Dios al ofrecer él mismo el sacrificio y al no destruir por completo a Amalec; por eso Dios lo desechó como rey.", "Por celos persiguió a David durante años.", "Murió junto a sus hijos en la batalla contra los filisteos en el monte Gilboa."], "notas": "", "juicio": "malo"}, {"id": "u-david", "tipo": "unido", "nombre": "David", "inicio": 1010, "fecha": "1010–970 a.C.", "duracion": "40 años", "texto": "1 Samuel 16 — 1 Reyes 2:11; 1 Crónicas 11—29", "puntos": ["Varón conforme al corazón de Dios, ungido por Samuel siendo pastor.", "Venció a Goliat y fue fiel a Saúl aun cuando éste lo perseguía.", "Conquistó Jerusalén, la hizo capital y llevó allí el arca del pacto.", "Dios le prometió un trono eterno por medio de su descendencia (2 Samuel 7).", "Pecó con Betsabé y contra Urías, pero se arrepintió de corazón (Salmo 51).", "Escribió gran parte de los Salmos y preparó todo para la construcción del templo."], "notas": "", "juicio": "bueno"}, {"id": "u-salomon", "tipo": "unido", "nombre": "Salomón", "inicio": 970, "fecha": "970–931 a.C.", "duracion": "40 años", "texto": "1 Reyes 1—11; 2 Crónicas 1—9", "puntos": ["Pidió a Dios sabiduría para gobernar, y Dios le dio además riquezas y gloria.", "Construyó el templo de Jerusalén.", "Escribió Proverbios, Eclesiastés y Cantares.", "Sus muchas mujeres extranjeras desviaron su corazón hacia otros dioses.", "Por su idolatría, Dios anunció que el reino sería dividido después de su muerte (1 Reyes 11:11-13)."], "notas": "", "juicio": "mixto"}, {"id": "ev-division", "tipo": "evento", "nombre": "División del reino", "inicio": 931, "fecha": "931 a.C.", "texto": "1 Reyes 12", "puntos": ["Tras la muerte de Salomón, las diez tribus del norte se rebelan contra Roboam en Siquem.", "Jeroboam reina sobre Israel (Norte); Roboam sobre Judá (Sur)."], "notas": "", "juicio": ""}, {"id": "n-jeroboam", "tipo": "norte", "nombre": "Jeroboam", "inicio": 931, "fecha": "931–909 a.C.", "duracion": "22 años", "texto": "1 Reyes 11:26—14:20; 2 Crónicas 9:29—13:22", "puntos": ["Fue miembro del consejo de ministros de Salomón, pero tuvo que huir a Egipto por un tiempo para librarse de la ira del rey.", "Dirigió la rebelión de las diez tribus en Siquem.", "Su religión falsa llevó a Israel a pecar.", "El altar que levantó fue destruido, su brazo quedó paralizado, y su hijo murió, todo a consecuencia de su pecado.", "Fue derrotado en la guerra que tuvo con Abiam, el segundo rey del reino del sur.", "Sufrió una enfermedad de parte de Dios y murió."], "notas": "", "juicio": "malo"}, {"id": "s-roboam", "tipo": "sur", "nombre": "Roboam", "inicio": 931, "fecha": "931–914 a.C.", "duracion": "17 años", "texto": "1 Reyes 11:42—14:31; 2 Crónicas 9:31—12:16", "puntos": ["Era el hijo de Salomón.", "Su necedad y falta de tacto provocó la guerra civil.", "Tuvo dieciocho esposas y sesenta concubinas.", "Su esposa favorita fue Maaca, la hija malvada de Absalón.", "Vio su reino y capital, Jerusalén, invadidas por Sisac de Egipto."], "notas": "", "juicio": "malo"}, {"id": "s-abiam", "tipo": "sur", "nombre": "Abiam / Abías", "inicio": 914, "fecha": "914–911 a.C.", "duracion": "3 años", "texto": "1 Reyes 14:31—15:8; 2 Crónicas 13:1-22", "puntos": ["Derrotó en el campo de batalla (mediante intervención sobrenatural) a Jeroboam, el rey del norte.", "A pesar de la ayuda de Dios, degeneró en un rey impío."], "notas": "A los 18 años de Jeroboam.", "juicio": "malo"}, {"id": "s-asa", "tipo": "sur", "nombre": "Asa", "inicio": 911, "fecha": "911–870 a.C.", "duracion": "41 años", "texto": "1 Reyes 15:8-24; 2 Crónicas 14:1—16:14", "puntos": ["Fue el primer rey piadoso de Judá.", "Dirigió a Israel en un avivamiento.", "Fue un gran constructor.", "Vio cómo Dios respondía a su oración librando a Jerusalén de un ataque masivo de los etíopes (2 Crónicas 14:11).", "Depuso a su abuela Maaca por su idolatría.", "Más tarde él cayó moralmente cuando arrojó en la cárcel a un profeta que le había amonestado.", "Murió de una enfermedad de los pies que rehusó confiar a Dios."], "notas": "A los 20 años de Jeroboam.", "juicio": "bueno"}, {"id": "n-nadab", "tipo": "norte", "nombre": "Nadab", "inicio": 910, "fecha": "910–908 a.C.", "duracion": "2 años", "texto": "1 Reyes 15:25-28", "puntos": ["Era hijo de Jeroboam.", "Fue asesinado por un rebelde llamado Baasa."], "notas": "En el 2.º año de Asa.", "juicio": "malo"}, {"id": "n-baasa", "tipo": "norte", "nombre": "Baasa", "inicio": 909, "fecha": "909–885 a.C.", "duracion": "24 años", "texto": "1 Reyes 15:27—16:7; 2 Crónicas 16:1-6", "puntos": ["Mató a Nadab y cumplió así la profecía de Ahías. Comparar 1 Reyes 14:4 con 15:29.", "Tuvo guerra con Asa (tercer rey del sur) y edificó un muro para cortar el comercio con Jerusalén.", "Fue predicho que su simiente sufriría el mismo castigo que Jeroboam."], "notas": "En el 3.er año de Asa. Capital: Tirsa.", "juicio": "malo"}, {"id": "n-ela", "tipo": "norte", "nombre": "Ela", "inicio": 886, "fecha": "886–885 a.C.", "duracion": "2 años", "texto": "1 Reyes 16:6-14", "puntos": [], "notas": "A los 26 años de Asa.", "juicio": "malo"}, {"id": "n-zimri", "tipo": "norte", "nombre": "Zimri", "inicio": 885, "fecha": "885 a.C.", "duracion": "7 días", "texto": "1 Reyes 16:9-20", "puntos": [], "notas": "A los 27 años de Asa.", "juicio": "malo"}, {"id": "n-omri", "tipo": "norte", "nombre": "Omri", "inicio": 885, "fecha": "885–874 a.C.", "duracion": "12 años", "texto": "1 Reyes 16:15-28", "puntos": [], "notas": "A los 31 años de Asa.", "juicio": "malo"}, {"id": "n-acab", "tipo": "norte", "nombre": "Acab", "inicio": 874, "fecha": "874–853 a.C.", "duracion": "22 años", "texto": "1 Reyes 16:28—22:40", "puntos": [], "notas": "A los 38 años de Asa.", "juicio": "malo"}, {"id": "s-josafat", "tipo": "sur", "nombre": "Josafat", "inicio": 873, "fecha": "873–848 a.C.", "duracion": "25 años", "texto": "1 Reyes 22:41-50; 2 Crónicas 17:1—20:37", "puntos": ["Instituyó un programa de educación religiosa nacional, enviando maestros que enseñaran la Palabra de Dios.", "Tiempo después echó a perder su testimonio al asociarse con tres reyes impíos del norte.", "Nombró líderes religiosos y civiles, reconociendo así la separación de iglesia y estado.", "Cuando Jerusalén se vio amenazada por una gran invasión moabita, oró al Señor y Dios intervino en forma sobrenatural."], "notas": "En el 4.º año de Acab.", "juicio": "bueno"}, {"id": "n-ocozias", "tipo": "norte", "nombre": "Ocozías", "inicio": 853, "fecha": "853–852 a.C.", "duracion": "2 años", "texto": "1 Reyes 22:40—2 Reyes 1:18", "puntos": [], "notas": "A los 17 años de Josafat.", "juicio": "malo"}, {"id": "s-joram", "tipo": "sur", "nombre": "Joram", "inicio": 853, "fecha": "853–841 a.C.", "duracion": "8 años", "texto": "2 Reyes 8:16-24; 2 Crónicas 21:1-20", "puntos": ["Se casó con Atalía, la hija de Acab y Jezabel.", "Empezó su reinado matando a sus seis hermanos.", "Recibió un mensaje póstumo de parte de Elías prediciendo el juicio de Dios sobre él por su malvada conducta.", "Fue atacado y derrotado por los filisteos y los árabes.", "Murió de una horrible enfermedad y no hubo duelo en su enterramiento."], "notas": "En el 5.º año de Joram (Norte).", "juicio": "malo"}, {"id": "n-joram", "tipo": "norte", "nombre": "Joram", "inicio": 852, "fecha": "852–841 a.C.", "duracion": "12 años", "texto": "2 Reyes 3:1—9:26", "puntos": [], "notas": "A los 18 años de Josafat.", "juicio": "malo"}, {"id": "s-ocozias", "tipo": "sur", "nombre": "Ocozías", "inicio": 841, "fecha": "841 a.C.", "duracion": "1 año", "texto": "2 Reyes 8:24—9:29; 2 Crónicas 22:1-9", "puntos": ["Era el hijo de Joram y Atalía.", "Fue asesinado por Jehú (décimo rey del norte)."], "notas": "A los 12 años de Joram (Norte).", "juicio": "malo"}, {"id": "n-jehu", "tipo": "norte", "nombre": "Jehú", "inicio": 841, "fecha": "841–814 a.C.", "duracion": "28 años", "texto": "2 Reyes 9:1—10:36", "puntos": [], "notas": "En el año de Ocozías.", "juicio": "mixto"}, {"id": "s-atalia", "tipo": "sur", "nombre": "Atalía", "inicio": 841, "fecha": "841–835 a.C.", "duracion": "6 años", "texto": "2 Reyes 11:1-20; 2 Crónicas 22:1—23:21", "puntos": ["A la muerte de su hijo Ocozías, ella usurpó el trono de Judá, matando a todos los posibles herederos del trono, excepto a uno (Joás), que lo escondieron.", "Después de seis años de reinado, ella también fue ejecutada."], "notas": "Mujer — mamá de Ocozías. En el 1.er año de Jehú.", "juicio": "malo"}, {"id": "s-joas", "tipo": "sur", "nombre": "Joás", "inicio": 835, "fecha": "835–796 a.C.", "duracion": "40 años", "texto": "2 Reyes 11:1—12:21; 2 Crónicas 22:10—24:27", "puntos": ["Fue el único sobreviviente de la sangrienta purga de Atalía.", "Vivió agradando a Dios por un tiempo, pero después llegó a ser un tirano cruel.", "Aprobó la lapidación de Zacarías, el sumo sacerdote de Judá, que tuvo el valor de reprenderle por su pecado.", "Murió asesinado por su propia guardia de palacio."], "notas": "Comenzó a reinar siendo niño (7 años). Joiada, el sacerdote, lo ayudó y mató a Atalía. En el 7.º año de Jehú.", "juicio": "mixto"}, {"id": "n-joacaz", "tipo": "norte", "nombre": "Joacaz", "inicio": 814, "fecha": "814–798 a.C.", "duracion": "17 años", "texto": "2 Reyes 13:1-9", "puntos": [], "notas": "Hijo de Jehú. A los 23 años de Joás.", "juicio": "malo"}, {"id": "n-joas", "tipo": "norte", "nombre": "Joás", "inicio": 798, "fecha": "798–782 a.C.", "duracion": "16 años", "texto": "2 Reyes 13:10-25", "puntos": [], "notas": "A los 37 años de Joás (Sur).", "juicio": "malo"}, {"id": "s-amasias", "tipo": "sur", "nombre": "Amasías", "inicio": 796, "fecha": "796–767 a.C.", "duracion": "29 años", "texto": "2 Reyes 14:1-20; 2 Crónicas 25:1-28", "puntos": ["Fue un buen rey por un tiempo. Ejecutó a los asesinos de su padre Joás.", "Fue reprendido por un profeta por contratar soldados mercenarios para que le ayudaran en su guerra contra Edom.", "Con renuencia envió de regreso a su tierra a los mercenarios y, con la ayuda de Dios, derrotó a Edom con su propio ejército.", "Obrando neciamente llevó a Jerusalén algunos ídolos edomitas con propósito de adorarlos.", "El temerario Amasías le declaró después la guerra al reino del norte y fue completamente derrotado."], "notas": "Perdió la guerra con el Norte. En el 2.º año de Joás (Norte).", "juicio": "mixto"}, {"id": "n-jeroboam2", "tipo": "norte", "nombre": "Jeroboam II", "inicio": 793, "fecha": "793–753 a.C.", "duracion": "41 años", "texto": "2 Reyes 14:23-29", "puntos": [], "notas": "A los 15 años de Amasías.", "juicio": "malo"}, {"id": "s-uzias", "tipo": "sur", "nombre": "Azarías / Uzías", "inicio": 792, "fecha": "792–740 a.C.", "duracion": "52 años", "texto": "2 Reyes 15:1-7; 2 Crónicas 26:1-23", "puntos": [], "notas": "Murió leproso por hacer un sacrificio que no le tocaba hacer. A los 27 años de Jeroboam II.", "juicio": "mixto"}, {"id": "n-zacarias", "tipo": "norte", "nombre": "Zacarías", "inicio": 753, "fecha": "753 a.C.", "duracion": "6 meses", "texto": "2 Reyes 15:8-12", "puntos": [], "notas": "Nieto de Jehú: 4.º rey de esta dinastía, cumplimiento de la promesa de Dios. A los 38 años de Azarías.", "juicio": "malo"}, {"id": "n-salum", "tipo": "norte", "nombre": "Salum", "inicio": 752, "fecha": "752 a.C.", "duracion": "1 mes", "texto": "2 Reyes 15:10-15", "puntos": ["Fue asesinado por un hombre perverso y cruel llamado Manahem."], "notas": "A los 39 años de Uzías.", "juicio": "malo"}, {"id": "n-manahem", "tipo": "norte", "nombre": "Manahem", "inicio": 752, "fecha": "752–742 a.C.", "duracion": "10 años", "texto": "2 Reyes 15:14-22", "puntos": ["Fue uno de los reyes más brutales de Israel.", "Compró la protección de Pul (Tiglat-pileser) el rey asirio, con mil talentos (treinta y tres mil kilos) de plata."], "notas": "A los 39 años de Uzías.", "juicio": "malo"}, {"id": "s-jotam", "tipo": "sur", "nombre": "Jotam", "inicio": 750, "fecha": "750–731 a.C.", "duracion": "16 años", "texto": "2 Reyes 15:32-38; 2 Crónicas 27", "puntos": [], "notas": "En el 2.º año de Peka.", "juicio": "bueno"}, {"id": "n-pekaia", "tipo": "norte", "nombre": "Pekaía", "inicio": 742, "fecha": "742–740 a.C.", "duracion": "2 años", "texto": "2 Reyes 15:22-26", "puntos": ["Era el hijo de Manahem.", "Fue asesinado por Peka, capitán de su ejército."], "notas": "A los 50 años de Uzías.", "juicio": "malo"}, {"id": "n-peka", "tipo": "norte", "nombre": "Peka", "inicio": 740, "fecha": "740–732 a.C.", "duracion": "20 años", "texto": "2 Reyes 15:27-31; 2 Crónicas 28:5-8", "puntos": ["En este cómputo sólo vemos ocho años. Se piensa que los primeros doce años (752-740) fueron compartidos en una especie de corregencia con Manahem y Pekaía.", "Se unió a Siria en un intento, que no tuvo éxito, de castigar a Judá por no aliarse con ellos contra Asiria.", "Vio cómo Asiria conquistaba algunas de las ciudades de Israel en la parte norte y este de su territorio.", "Fue asesinado por Oseas."], "notas": "A los 50 años de Uzías.", "juicio": "malo"}, {"id": "s-acaz", "tipo": "sur", "nombre": "Acaz", "inicio": 735, "fecha": "735–715 a.C.", "duracion": "16 años", "texto": "2 Reyes 16; 2 Crónicas 28", "puntos": [], "notas": "A los 17 años de Peka.", "juicio": "malo"}, {"id": "n-oseas", "tipo": "norte", "nombre": "Oseas", "inicio": 732, "fecha": "732–723 a.C.", "duracion": "9 años", "texto": "2 Reyes 15:30—17:6", "puntos": ["Fue el último rey de Israel.", "Se unió a Egipto en una rebelión contra Asiria.", "Por esta razón fue depuesto y encarcelado por Asiria."], "notas": "A los 12 años de Acaz.", "juicio": "malo"}, {"id": "ev-samaria", "tipo": "evento", "nombre": "Caída de Samaria", "inicio": 722, "fecha": "722 a.C.", "texto": "2 Reyes 17", "puntos": ["El Imperio Asirio conquista Samaria y lleva cautivo al reino del Norte.", "Fin del reino de Israel."], "notas": "Imperio Asirio — FIN del Norte.", "juicio": ""}, {"id": "s-ezequias", "tipo": "sur", "nombre": "Ezequías", "inicio": 715, "fecha": "715–686 a.C.", "duracion": "29 años", "texto": "2 Reyes 18—20; 2 Crónicas 29—32", "puntos": ["Fue el segundo mejor rey de Judá.", "Emprendió obras de reparación del templo y organizó grupos musicales tanto de instrumentos como de canto.", "Llevó a cabo la más grande celebración de la Pascua desde los días de Salomón.", "Vio al Ángel de Jehová derrotar al enemigo asirio que había cercado Jerusalén.", "Fue curado de manera sobrenatural de una enfermedad mortal y se le concedieron quince años más de vida.", "Añadió quince salmos al canon del Antiguo Testamento.", "Mostró neciamente las riquezas de Judá a unos embajadores babilonios deseosos de indagar."], "notas": "Segundo mejor rey. Escribió salmos. 15 años más de vida. En el 3.er año de Oseas.", "juicio": "bueno"}, {"id": "s-manases", "tipo": "sur", "nombre": "Manasés", "inicio": 697, "fecha": "697–642 a.C.", "duracion": "55 años", "texto": "2 Reyes 21:1-18; 2 Crónicas 33:1-20", "puntos": ["Reinó más tiempo que ningún otro rey del norte o del sur.", "Fue el peor de todos los reyes.", "Experimentó el nuevo nacimiento mientras se encontraba prisionero de sus enemigos."], "notas": "", "juicio": "malo"}, {"id": "s-amon", "tipo": "sur", "nombre": "Amón", "inicio": 643, "fecha": "643–641 a.C.", "duracion": "2 años", "texto": "2 Reyes 21:19-26; 2 Crónicas 33:21-25", "puntos": ["Fue un hombre impío a semejanza de su padre, pero no se arrepintió como él.", "Sus mismos siervos lo mataron en su propia casa."], "notas": "", "juicio": "malo"}, {"id": "s-josias", "tipo": "sur", "nombre": "Josías", "inicio": 641, "fecha": "641–610 a.C.", "duracion": "31 años", "texto": "2 Reyes 22:1—23:30; 2 Crónicas 34:1—35:27", "puntos": ["Fue el rey más piadoso desde los días de David.", "Fue el último rey de Judá que agradó al Señor.", "El libro de Moisés fue descubierto accidentalmente entre los escombros del templo al principio de su reinado.", "Usó este suceso para dirigir a Judá en un gran avivamiento.", "También llevó a cabo una celebración de la pascua mayor que la que hubo en los días de su bisabuelo Ezequías.", "Cumplió con una antigua profecía dada trescientos años antes. Comparar 1 Reyes 13:1, 2 con 2 Reyes 23:15.", "Murió en una guerra con los egipcios."], "notas": "Comenzó a reinar a los 8 años.", "juicio": "bueno"}, {"id": "s-joacaz", "tipo": "sur", "nombre": "Joacaz", "inicio": 609, "fecha": "609 a.C.", "duracion": "3 meses", "texto": "2 Reyes 23:31-33; 2 Crónicas 36:1-4", "puntos": ["Era el hijo intermedio de Josías.", "Fue destronado a los noventa días de empezar a reinar por el faraón Necao que había matado a su padre.", "Fue llevado cautivo a Egipto donde murió."], "notas": "Tenía 23 años.", "juicio": "malo"}, {"id": "s-joacim", "tipo": "sur", "nombre": "Joacim", "inicio": 609, "fecha": "609–598 a.C.", "duracion": "11 años", "texto": "2 Reyes 23:34—24:5; 2 Crónicas 36:5-7", "puntos": ["Era el hermano mayor de Joacaz.", "Fue elevado al trono por el faraón egipcio.", "Nabucodonosor lo hizo más tarde vasallo suyo cuando los babilonios derrotaron a los egipcios.", "Se mostró completamente materialista y egocéntrico. Puede ser considerado como el tercer peor rey de Judá.", "Mató a los inocentes y persiguió frecuentemente a Jeremías.", "Quemó una copia de una parte de la Palabra de Dios (véase Jer. 36:22-32).", "Experimentó la primera de las temibles visitas de Nabucodonosor a Jerusalén.", "Durante esta visita (606 a.C.), Daniel y otros jóvenes hebreos fueron llevados cautivos.", "Cuando murió fue enterrado como un asno, tal como había predicho Jeremías."], "notas": "", "juicio": "malo"}, {"id": "ev-dep1", "tipo": "evento", "nombre": "1.ª deportación a Babilonia", "inicio": 606, "fecha": "606 a.C.", "texto": "2 Reyes 24:1; Daniel 1:1-6", "puntos": ["Primera visita de Nabucodonosor a Jerusalén, en tiempos de Joacim.", "Daniel y otros jóvenes hebreos son llevados cautivos."], "notas": "", "juicio": ""}, {"id": "s-joaquin", "tipo": "sur", "nombre": "Joaquín", "inicio": 598, "fecha": "598 a.C.", "duracion": "3 meses", "texto": "2 Reyes 24:6-16; 2 Crónicas 36:8-10", "puntos": ["Era el hijo de Joacim y nieto de Josías.", "Incurrió en la ira y maldición de Dios de que ninguno de sus hijos se sentaría en el trono de Judá.", "Tanto Ezequiel (19:5-9) como Jeremías (22:24-26) predijeron que sería llevado cautivo a Babilonia.", "Esto ocurrió durante el segundo sitio a que Nabucodonosor sometió a Jerusalén. Ezequiel fue también deportado en esta ocasión.", "Posteriormente murió en Babilonia."], "notas": "", "juicio": "malo"}, {"id": "ev-dep2", "tipo": "evento", "nombre": "2.ª deportación a Babilonia", "inicio": 597, "fecha": "597 a.C.", "texto": "2 Reyes 24:10-16", "puntos": ["Segundo sitio de Nabucodonosor a Jerusalén.", "El rey Joaquín y el profeta Ezequiel son llevados cautivos."], "notas": "", "juicio": ""}, {"id": "s-sedequias", "tipo": "sur", "nombre": "Sedequías", "inicio": 597, "fecha": "597–586 a.C.", "duracion": "11 años", "texto": "2 Reyes 24:17—25:30; 2 Crónicas 36:11-21", "puntos": [], "notas": "Último rey de Judá.", "juicio": "malo"}, {"id": "ev-dep3", "tipo": "evento", "nombre": "3.ª deportación · Destrucción de Jerusalén", "inicio": 586, "fecha": "586 a.C.", "texto": "2 Reyes 25", "puntos": ["Nabucodonosor destruye Jerusalén y el templo.", "El pueblo de Judá es llevado cautivo a Babilonia. FIN del reino del Sur."], "notas": "", "juicio": ""}]}
+</script>
+
+<script>
+(() => {
+'use strict';
+const ORIGINAL_HTML = '<!doctype html>\n' + document.documentElement.outerHTML;
+const SEED = JSON.parse(document.getElementById('seed').textContent);
+const $ = s => document.querySelector(s);
+const stage = $('#stage'), scroller = $('#scroller'), dlg = $('#dlg'), sheet = $('#sheet');
+const TIPOS = {unido:'Reino Unido', norte:'Reino del Norte · Israel', sur:'Reino del Sur · Judá', evento:'Suceso'};
+const JUICIO = {bueno:'Agradó a Dios', mixto:'Bueno con reservas', malo:'Hizo lo malo ante Dios'};
+const SVGNS = 'http://www.w3.org/2000/svg';
+let data = structuredClone(SEED);
+let filtro = 'todos', query = '', L = null, ordered = [];
+
+/* ---------- IndexedDB ---------- */
+const DB = {
+  open(){ return new Promise((res,rej)=>{ const r = indexedDB.open('linea-tiempo-reyes',1);
+    r.onupgradeneeded = () => r.result.createObjectStore('kv');
+    r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error); }); },
+  async get(k){ try{ const db = await this.open(); return await new Promise((res,rej)=>{ const q = db.transaction('kv').objectStore('kv').get(k); q.onsuccess=()=>res(q.result); q.onerror=()=>rej(q.error); }); }catch(e){ return null; } },
+  async set(k,v){ const db = await this.open(); return new Promise((res,rej)=>{ const t = db.transaction('kv','readwrite'); t.objectStore('kv').put(v,k); t.oncomplete=res; t.onerror=()=>rej(t.error); }); },
+  async del(k){ const db = await this.open(); return new Promise((res)=>{ const t = db.transaction('kv','readwrite'); t.objectStore('kv').delete(k); t.oncomplete=res; }); }
+};
+async function save(){
+  data.updatedAt = Date.now();
+  try{ await DB.set('data', data); toast('Guardado'); }
+  catch(e){ toast('No se pudo guardar: ' + e.message); }
+}
+
+/* ---------- Helpers ---------- */
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const el = (tag, attrs={}, parent) => { const n = document.createElementNS(SVGNS, tag); for(const k in attrs) n.setAttribute(k, attrs[k]); parent && parent.appendChild(n); return n; };
+function sortItems(){
+  return data.items.map((it,i)=>({it,i})).sort((a,b)=>
+    (b.it.inicio - a.it.inicio) || ((a.it.tipo==='evento'?0:1) - (b.it.tipo==='evento'?0:1)) || (a.i - b.i)
+  ).map(x=>x.it);
+}
+function laneNumbers(list){
+  const c = {}, m = {};
+  list.forEach(it => { if(it.tipo!=='evento'){ c[it.tipo]=(c[it.tipo]||0)+1; m[it.id]=c[it.tipo]; } });
+  return m;
+}
+const pad = n => String(n).padStart(2,'0');
+function bubbleHTML(it){
+  return `<div class="bub"><div class="img">${it.imagen ? `<img src="${it.imagen}" alt="Ilustración de ${esc(it.nombre)}" loading="lazy" draggable="false">`
+    : `<div class="ph">img ilustración<br>${esc(it.nombre)}</div>`}</div></div>`;
+}
+
+/* ---------- Layout ---------- */
+function makeLayout(){
+  const M = innerWidth < 700;
+  const l = {M, CW:M?182:226, CH:M?78:90, BS:M?54:64, GAP:M?12:18, STEM:M?26:34, BAND:M?132:150, PX:M?12:15, UPX:M?3.4:4.4, X0:M?92:130, SPLIT:M?160:230, EW:M?186:214, EH:52};
+  l.T1 = 22; l.T0 = l.T1 + l.CH + 14; l.NY = l.T0 + l.CH + l.STEM;
+  l.MY = l.NY + l.BAND/2; l.SY = l.NY + l.BAND;
+  l.S0 = l.SY + l.STEM; l.S1 = l.S0 + l.CH + 14; l.RY = l.S1 + l.CH + 40; l.H = l.RY + 30;
+  const years = data.items.map(i=>i.inicio).filter(Number.isFinite);
+  l.U0 = Math.max(1050, ...years); l.END = Math.min(586, ...years);
+  l.xu = y => l.X0 + (l.U0 - y) * l.UPX;
+  l.XS = l.xu(931);
+  l.xd = y => l.XS + l.SPLIT + (931 - y) * l.PX;
+  l.xOf = it => (it.inicio > 931 || it.tipo==='unido') ? l.xu(it.inicio) : (it.inicio===931 && it.tipo==='evento') ? l.XS : l.xd(it.inicio);
+  l.yearAt = x => x < l.XS ? l.U0 - (x - l.X0)/l.UPX : x < l.XS + l.SPLIT ? 931 : 931 - (x - l.XS - l.SPLIT)/l.PX;
+  return l;
+}
+
+function render(){
+  L = makeLayout();
+  ordered = sortItems();
+  const nums = laneNumbers(ordered);
+  stage.innerHTML = '';
+  stage.style.setProperty('--bs', L.BS + 'px');
+
+  // Place items (greedy, two tiers per lane so cards never overlap)
+  const tiers = {
+    unido:[{top:L.MY-L.STEM-L.CH, line:L.MY, edge:'b'},{top:L.MY+L.STEM, line:L.MY, edge:'t'}],
+    norte:[{top:L.T0, line:L.NY, edge:'b'},{top:L.T1, line:L.NY, edge:'b'}],
+    sur:[{top:L.S0, line:L.SY, edge:'t'},{top:L.S1, line:L.SY, edge:'t'}],
+  };
+  const right = {unido:[-1e9,-1e9], norte:[-1e9,-1e9], sur:[-1e9,-1e9], evento:[-1e9]};
+  const placed = [];
+  let maxX = L.xd(L.END);
+  for(const it of ordered){
+    const x = L.xOf(it);
+    if(it.tipo === 'evento'){
+      const left = Math.max(x - L.EW/2, right.evento[0] + L.GAP);
+      right.evento[0] = left + L.EW;
+      placed.push({it, x, left, top:L.MY - L.EH/2, ev:true});
+      maxX = Math.max(maxX, left + L.EW);
+      continue;
+    }
+    const lane = tiers[it.tipo] ? it.tipo : 'sur';
+    const ideal = x - L.CW*0.22;
+    const c0 = Math.max(ideal, right[lane][0] + L.GAP), c1 = Math.max(ideal, right[lane][1] + L.GAP);
+    const t = c0 <= c1 + 4 ? 0 : 1;
+    const left = t ? c1 : c0;
+    right[lane][t] = left + L.CW;
+    placed.push({it, x, left, lane, tier:tiers[lane][t]});
+    maxX = Math.max(maxX, left + L.CW);
+  }
+  const W = maxX + (L.M ? 80 : 200);
+  stage.style.width = W + 'px'; stage.style.height = L.H + 'px';
+
+  // SVG
+  const svg = el('svg', {width:W, height:L.H, viewBox:`0 0 ${W} ${L.H}`});
+  const defs = el('defs', {}, svg);
+  const rg = el('radialGradient', {id:'rg'}, defs);
+  el('stop', {offset:'0', 'stop-color':'#fff'}, rg); el('stop', {offset:'1', 'stop-color':'#000'}, rg);
+  const mask = el('mask', {id:'spotMask', maskUnits:'userSpaceOnUse', x:0, y:0, width:W, height:L.H}, defs);
+  el('rect', {x:0, y:0, width:W, height:L.H, fill:'#000'}, mask);
+  const spotC = el('circle', {cx:-999, cy:0, r:L.M?160:240, fill:'url(#rg)'}, mask);
+  const lg = el('linearGradient', {id:'lgN', x1:0, x2:1}, defs);
+  el('stop', {offset:'0', 'stop-color':'#ff8a3d'}, lg); el('stop', {offset:'1', 'stop-color':'#ff3d2e'}, lg);
+
+  // Ruler
+  const ruler = el('g', {}, svg);
+  el('line', {x1:L.X0-60, x2:W-40, y1:L.RY, y2:L.RY, class:'tick'}, ruler);
+  const ticks = [];
+  for(let y = L.U0 - (L.U0 % 25); y > 931; y -= 25) ticks.push([L.xu(y), y]);
+  ticks.push([L.XS + L.SPLIT, 931]);
+  for(let y = 925; y >= L.END; y -= 25) ticks.push([L.xd(y), y]);
+  if(L.END % 25) ticks.push([L.xd(L.END), L.END]);
+  for(const [x,y] of ticks){
+    el('line', {x1:x, x2:x, y1:L.RY-6, y2:L.RY+6, class:'tick'}, ruler);
+    const t = el('text', {x, y:L.RY+22, 'text-anchor':'middle', class:'tick-l'}, ruler); t.textContent = y + ' a.C.';
+  }
+
+  // Lanes
+  const hasNorte = ordered.some(i=>i.tipo==='norte');
+  const nEnd = L.xd(Math.min(722, ...ordered.filter(i=>i.tipo==='norte').map(i=>i.inicio)));
+  const sEnd = L.xd(L.END);
+  const P = {
+    unido:`M${L.X0-60} ${L.MY} H${L.XS}`,
+    norte:`M${L.XS} ${L.MY} C${L.XS+L.SPLIT*.55} ${L.MY} ${L.XS+L.SPLIT*.45} ${L.NY} ${L.XS+L.SPLIT} ${L.NY} H${nEnd}`,
+    sur:`M${L.XS} ${L.MY} C${L.XS+L.SPLIT*.55} ${L.MY} ${L.XS+L.SPLIT*.45} ${L.SY} ${L.XS+L.SPLIT} ${L.SY} H${sEnd}`,
+  };
+  const lanes = ['unido', ...(hasNorte?['norte']:[]), 'sur'];
+  const connG = el('g', {}, svg);
+  const baseG = el('g', {}, svg);
+  for(const k of lanes) el('path', {d:P[k], class:'base draw', pathLength:1, 'data-lane':k}, baseG);
+  const glowG = el('g', {}, svg);
+  for(const k of lanes) el('path', {d:P[k], class:'glow '+k}, glowG);
+  const spot = el('g', {class:'spot', mask:'url(#spotMask)'}, svg);
+  const colors = {unido:'#f3e9dc', norte:'#ff5b1f', sur:'#ffb347'};
+  for(const k of lanes) el('path', {d:P[k], stroke:colors[k], style:`filter:drop-shadow(0 0 6px ${colors[k]})`}, spot);
+
+  // Caps + lane labels
+  el('circle', {cx:L.X0-60, cy:L.MY, r:6, fill:'#f3e9dc'}, svg);
+  if(hasNorte) el('circle', {cx:nEnd, cy:L.NY, r:6, fill:'var(--bg)', stroke:'#ff5b1f', class:'cap'}, svg);
+  el('circle', {cx:sEnd, cy:L.SY, r:6, fill:'var(--bg)', stroke:'#ffb347', class:'cap'}, svg);
+  const lbl = (x,y,txt,fill,anchor='start') => { const t = el('text', {x, y, fill, class:'lane-l', 'text-anchor':anchor}, svg); t.textContent = txt; };
+  lbl(L.X0-60, L.MY+24, 'REINO UNIDO', '#f3e9dc');
+  if(hasNorte) lbl(L.XS+L.SPLIT+14, L.NY+24, 'ISRAEL · NORTE', '#ff5b1f');
+  lbl(L.XS+L.SPLIT+14, L.SY-14, 'JUDÁ · SUR', '#ffb347');
+  if(hasNorte){ lbl(nEnd+14, L.NY+4, 'FIN DEL NORTE', '#6e6862'); }
+  lbl(sEnd+14, L.SY+4, 'EXILIO', '#6e6862');
+
+  stage.appendChild(svg);
+
+  // Connectors, dots, cards
+  for(const p of placed){
+    const it = p.it;
+    let node;
+    if(p.ev){
+      if(it.inicio <= 931){
+        const y1 = (hasNorte && it.inicio >= 722 && it.inicio < 931) ? L.NY : L.MY;
+        if(it.inicio < 931) el('line', {x1:p.x, x2:p.x, y1, y2:L.SY, class:'ev-line', 'data-id':it.id}, connG);
+        if(it.inicio < 931) el('circle', {cx:p.x, cy:L.SY, r:5, class:'dot on', style:'--lc:var(--evento);stroke:var(--evento)', 'data-id':it.id}, svg);
+        if(y1 === L.NY) el('circle', {cx:p.x, cy:L.NY, r:5, class:'dot on', style:'--lc:var(--evento);stroke:var(--evento)', 'data-id':it.id}, svg);
+      }
+      if(p.left > p.x - L.EW/2 + 2) el('path', {d:`M${p.x} ${L.MY} H${p.left+20}`, class:'conn', style:'--lc:var(--evento)', 'data-id':it.id}, connG);
+      node = document.createElement('div');
+      node.className = 'evp';
+      node.style.cssText = `left:${p.left}px;top:${p.top}px;width:${L.EW}px;height:${L.EH}px`;
+      node.innerHTML = `<span class="pulse"></span><div style="min-width:0"><b>${esc(it.fecha)}</b><span class="et">${esc(it.nombre)}</span></div><span class="admin-edit">editar</span>`;
+    } else {
+      const tr = p.tier, edgeY = tr.edge==='b' ? tr.top + L.CH : tr.top;
+      const ax = Math.max(p.left + 30, Math.min(p.x, p.left + L.CW - 30));
+      const my = (tr.line + edgeY)/2;
+      el('path', {d:`M${p.x} ${tr.line} C${p.x} ${my} ${ax} ${my} ${ax} ${edgeY}`, class:'conn', style:`--lc:var(--${p.lane})`, 'data-id':it.id}, connG);
+      el('circle', {cx:p.x, cy:tr.line, r:5, class:'dot', style:`--lc:var(--${p.lane});stroke:var(--${p.lane})`, 'data-id':it.id}, svg);
+      node = document.createElement('div');
+      node.className = 'card k-' + p.lane;
+      node.style.cssText = `left:${p.left}px;top:${tr.top}px;width:${L.CW}px;height:${L.CH}px`;
+      node.innerHTML = `${bubbleHTML(it)}<div class="ct"><span class="no">#${pad(nums[it.id])}</span><h3>${esc(it.nombre)}</h3>
+        <div class="mt">${esc(it.fecha)}</div>
+        <div class="mt">${it.juicio?`<i class="jd" style="background:var(--${it.juicio})" title="${JUICIO[it.juicio]}"></i>`:''}${esc(it.duracion||'')}</div></div><span class="admin-edit">editar</span>`;
+    }
+    node.dataset.id = it.id; node.dataset.lane = p.ev ? 'evento' : p.lane;
+    node.tabIndex = 0; node.setAttribute('role','button'); node.setAttribute('aria-label', `${it.nombre}, ${it.fecha}`);
+    stage.appendChild(node);
+  }
+
+  // Spotlight follows the mouse along the lines
+  stage.onpointermove = e => { const r = stage.getBoundingClientRect(); spotC.setAttribute('cx', e.clientX - r.left); spotC.setAttribute('cy', e.clientY - r.top); };
+  stage.onpointerenter = () => stage.classList.add('hover');
+  stage.onpointerleave = () => stage.classList.remove('hover');
+  applyFilter();
+  updateNow();
+}
+
+/* ---------- Hover: light the lane, connector and dot ---------- */
+function setHL(node, on){
+  const lane = node.dataset.lane, id = node.dataset.id;
+  stage.classList.toggle('hl-' + lane, on);
+  stage.querySelectorAll(`[data-id="${CSS.escape(id)}"]`).forEach(n => { if(n !== node && !n.classList.contains('ev-line')) n.classList.toggle('on', on || (n.tagName==='circle' && lane==='evento')); });
+}
+stage.addEventListener('pointerover', e => { const n = e.target.closest('.card,.evp'); if(n && !n.contains(e.relatedTarget)) setHL(n, true); });
+stage.addEventListener('pointerout', e => { const n = e.target.closest('.card,.evp'); if(n && !n.contains(e.relatedTarget)) setHL(n, false); });
+stage.addEventListener('focusin', e => { const n = e.target.closest('.card,.evp'); n && setHL(n, true); });
+stage.addEventListener('focusout', e => { const n = e.target.closest('.card,.evp'); n && setHL(n, false); });
+
+/* ---------- Filters / search ---------- */
+function matches(it){
+  const q = query.trim().toLowerCase();
+  return (filtro==='todos' || it.tipo===filtro) &&
+    (!q || [it.nombre,it.fecha,it.texto,it.notas,...(it.puntos||[])].join(' ').toLowerCase().includes(q));
+}
+function applyFilter(){
+  const q = query.trim();
+  let first = null;
+  stage.querySelectorAll('.card,.evp').forEach(n => {
+    const it = data.items.find(x=>x.id===n.dataset.id); const ok = matches(it);
+    n.classList.toggle('dim', !ok); n.classList.toggle('match', !!q && ok);
+    if(ok && !first) first = n;
+  });
+  return first;
+}
+document.querySelectorAll('.chip').forEach(b => b.addEventListener('click', () => {
+  filtro = b.dataset.f; document.querySelectorAll('.chip').forEach(x => x.setAttribute('aria-pressed', x===b));
+  const f = applyFilter(); if(f && filtro!=='todos') scrollToX(parseFloat(f.style.left));
+}));
+let qt; $('#q').addEventListener('input', e => { query = e.target.value; clearTimeout(qt);
+  qt = setTimeout(() => { const f = applyFilter(); if(f && query.trim()) scrollToX(parseFloat(f.style.left)); }, 250); });
+
+/* ---------- Horizontal navigation ---------- */
+function scrollToX(x, frac=.3){ scroller.scrollTo({left: Math.max(0, x - scroller.clientWidth*frac), behavior:'smooth'}); }
+function updateNow(){
+  if(!L) return;
+  const max = scroller.scrollWidth - scroller.clientWidth;
+  $('#prog').style.width = (max>0 ? scroller.scrollLeft/max*100 : 0) + '%';
+  const yr = Math.round(Math.min(L.U0, Math.max(L.END, L.yearAt(scroller.scrollLeft + scroller.clientWidth*.5))));
+  $('#nowYear').textContent = (yr===931 ? '931' : '≈ ' + yr) + ' a.C.';
+  $('#nowEra').textContent = yr > 931 ? 'Reino Unido' : yr > 722 ? 'Reino dividido' : yr > 606 ? 'Judá solo' : 'Deportaciones';
+}
+scroller.addEventListener('scroll', updateNow, {passive:true});
+scroller.addEventListener('wheel', e => {
+  if(Math.abs(e.deltaY) <= Math.abs(e.deltaX) || e.shiftKey) return;
+  const max = scroller.scrollWidth - scroller.clientWidth;
+  if((e.deltaY < 0 && scroller.scrollLeft <= 0) || (e.deltaY > 0 && scroller.scrollLeft >= max - 1)) return;
+  e.preventDefault(); scroller.scrollLeft += e.deltaY;
+}, {passive:false});
+let drag = null, dragged = false;
+scroller.addEventListener('pointerdown', e => {
+  if(e.pointerType !== 'mouse' || e.button !== 0) return;
+  drag = {x:e.clientX, s:scroller.scrollLeft}; dragged = false;
+});
+window.addEventListener('pointermove', e => {
+  if(!drag) return;
+  const dx = e.clientX - drag.x;
+  if(Math.abs(dx) > 5){ dragged = true; scroller.classList.add('dragging'); }
+  if(dragged) scroller.scrollLeft = drag.s - dx;
+});
+window.addEventListener('pointerup', () => { drag = null; scroller.classList.remove('dragging'); });
+const step = d => scroller.scrollBy({left: d * scroller.clientWidth * .7, behavior:'smooth'});
+$('#prevBtn').onclick = () => step(-1); $('#nextBtn').onclick = () => step(1);
+
+document.querySelectorAll('[data-era]').forEach(b => b.onclick = () => {
+  const x = {unido:L.X0-60, division:L.XS, samaria:L.xd(722), exilio:L.xd(609)}[b.dataset.era];
+  $('#linea').scrollIntoView({behavior:'smooth'});
+  scrollToX(x, b.dataset.era==='unido' ? 0 : .25);
+});
+document.querySelectorAll('[data-jump]').forEach(a => a.onclick = () => {
+  const t = a.dataset.jump; if(t==='top') scrollTo({top:0, behavior:'smooth'}); else $('#'+t).scrollIntoView({behavior:'smooth'});
+});
+
+stage.addEventListener('click', e => { if(dragged) return; const n = e.target.closest('.card,.evp'); n && openItem(n.dataset.id); });
+stage.addEventListener('keydown', e => { if((e.key==='Enter'||e.key===' ') && e.target.matches('.card,.evp')){ e.preventDefault(); openItem(e.target.dataset.id); } });
+
+function stats(){
+  const c = t => data.items.filter(i=>i.tipo===t).length;
+  const deps = data.items.filter(i=>i.tipo==='evento' && /deportaci/i.test(i.nombre)).length;
+  $('#stats').innerHTML = `<div class="lbl">Una historia de casi 500 años</div>
+    <div class="stat"><i style="background:var(--unido)"></i><div>${c('unido')} reyes<small>Reino Unido</small></div></div>
+    <div class="stat"><i style="background:var(--norte)"></i><div>${c('norte')} reyes<small>Israel · Norte</small></div></div>
+    <div class="stat"><i style="background:var(--sur)"></i><div>${c('sur')} reyes<small>Judá · Sur</small></div></div>
+    <div class="stat"><i style="background:var(--evento)"></i><div>${deps} deportaciones<small>A Babilonia</small></div></div>`;
+}
+
+function openItem(id){ isAdmin() ? showForm(id) : showDetail(id); }
+
+/* ---------- Detail ---------- */
+function showDetail(id){
+  const it = data.items.find(x=>x.id===id); if(!it) return;
+  const list = ordered.filter(matches);
+  const idx = list.findIndex(x=>x.id===id), prev = list[idx-1], next = list[idx+1];
+  const nums = laneNumbers(ordered);
+  const lc = `var(--${it.tipo})`;
+  sheet.style.setProperty('--lc', lc);
+  sheet.innerHTML = `<button class="close" aria-label="Cerrar">✕</button>
+  <div class="detail">
+    <div class="pic k-${it.tipo}">${it.imagen?`<img src="${it.imagen}" alt="Ilustración de ${esc(it.nombre)}">`:`<div class="ph">img ilustración<br>${esc(it.nombre)}</div>`}</div>
+    <div class="body">
+      <div class="kick">${it.tipo!=='evento'?`#${pad(nums[it.id])} · `:''}${TIPOS[it.tipo]}</div>
+      <h2>${esc(it.nombre)}</h2>
+      <div class="facts">
+        <div class="fact"><small>Fecha</small><span>${esc(it.fecha)}</span></div>
+        ${it.duracion?`<div class="fact"><small>Duración</small><span>${esc(it.duracion)}</span></div>`:''}
+        ${it.juicio?`<div class="fact"><small>Juicio</small><span style="color:var(--${it.juicio})">${JUICIO[it.juicio]}</span></div>`:''}
+        ${it.texto?`<div class="fact" style="grid-column:1/-1"><small>Texto bíblico</small><span>${esc(it.texto)}</span></div>`:''}
+      </div>
+      ${(it.puntos&&it.puntos.length)?`<ol class="pts">${it.puntos.map(p=>`<li><span>${esc(p)}</span></li>`).join('')}</ol>`:''}
+      ${it.notas?`<div class="notes"><b>Notas</b>${esc(it.notas)}</div>`:''}
+    </div>
+  </div>
+  <div class="nav">
+    <button class="nbtn" ${prev?`data-go="${prev.id}"`:'disabled'}>← ${prev?esc(prev.nombre):''}</button>
+    <button class="nbtn" ${next?`data-go="${next.id}"`:'disabled'}>${next?esc(next.nombre):''} →</button>
+  </div>`;
+  sheet.querySelector('.close').onclick = () => dlg.close();
+  sheet.querySelectorAll('[data-go]').forEach(b => b.onclick = () => showDetail(b.dataset.go));
+  if(!dlg.open) dlg.showModal();
+  sheet.scrollTop = 0;
+  const n = stage.querySelector(`[data-id="${CSS.escape(id)}"].card, [data-id="${CSS.escape(id)}"].evp`);
+  if(n) scrollToX(parseFloat(n.style.left), .35);
+}
+dlg.addEventListener('click', e => { if(e.target === dlg) dlg.close(); });
+document.addEventListener('keydown', e => {
+  if(e.target.matches('input,textarea,select')) return;
+  if(dlg.open){
+    if(isAdmin()) return;
+    const b = [...sheet.querySelectorAll('.nav .nbtn')];
+    if(e.key==='ArrowRight') b[1]?.click();
+    if(e.key==='ArrowLeft') b[0]?.click();
+    return;
+  }
+  if(e.key==='ArrowRight') step(.5);
+  if(e.key==='ArrowLeft') step(-.5);
+});
+
+/* ---------- Admin ---------- */
+function isAdmin(){ return document.body.classList.contains('admin'); }
+function setAdmin(on){
+  document.body.classList.toggle('admin', on);
+  if(on && location.hash!=='#admin') history.replaceState(null,'','#admin');
+  if(!on && location.hash==='#admin') history.replaceState(null,'',location.pathname + location.search);
+}
+$('#adminLink').onclick = () => { setAdmin(true); scrollTo({top:0, behavior:'smooth'}); };
+$('#btnExit').onclick = () => setAdmin(false);
+window.addEventListener('hashchange', () => setAdmin(location.hash==='#admin'));
+
+function showForm(id){
+  const isNew = !id;
+  const it = isNew ? {id:'i'+Date.now().toString(36), tipo:'sur', nombre:'', inicio:'', fecha:'', duracion:'', texto:'', puntos:[], notas:'', juicio:''}
+                   : structuredClone(data.items.find(x=>x.id===id));
+  let img = it.imagen || '';
+  sheet.style.setProperty('--lc', 'var(--or)');
+  sheet.innerHTML = `<button class="close" aria-label="Cerrar">✕</button>
+  <form class="form" id="f">
+    <h2>${isNew?'Agregar':'Editar · '+esc(it.nombre)}</h2>
+    <div class="imgedit">
+      <div id="prev"></div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <label class="btn primary" style="text-align:center">Subir ilustración<input type="file" id="fimg" accept="image/*" hidden></label>
+        <button type="button" class="btn danger" id="rmimg">Quitar ilustración</button>
+        <small style="color:var(--faint)">Se ajusta sola. Ideal: imagen cuadrada.</small>
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="field"><label>Tipo</label><select name="tipo">
+        <option value="unido">Rey del Reino Unido</option><option value="norte">Rey del Norte (Israel)</option><option value="sur">Rey del Sur (Judá)</option><option value="evento">Suceso / evento</option></select></div>
+      <div class="field"><label>Nombre</label><input name="nombre" required></div>
+      <div class="field"><label>Año de inicio (número, a.C.) — ubica en la línea</label><input name="inicio" type="number" min="1" max="4000" required></div>
+      <div class="field"><label>Fecha como se muestra</label><input name="fecha" placeholder="931–909 a.C."></div>
+      <div class="field"><label>Duración del reinado</label><input name="duracion" placeholder="22 años"></div>
+      <div class="field"><label>Juicio (punto de color)</label><select name="juicio">
+        <option value="">— ninguno —</option><option value="bueno">Agradó a Dios</option><option value="mixto">Bueno con reservas</option><option value="malo">Hizo lo malo</option></select></div>
+    </div>
+    <div class="field"><label>Texto bíblico</label><input name="texto" placeholder="1 Reyes 11:26—14:20"></div>
+    <div class="field"><label>Puntos (uno por línea)</label><textarea name="puntos" rows="6"></textarea></div>
+    <div class="field"><label>Notas personales</label><textarea name="notas" rows="3"></textarea></div>
+    <div class="actions">
+      ${isNew?'<span></span>':'<button type="button" class="btn danger" id="del">Eliminar</button>'}
+      <div style="display:flex;gap:8px"><button type="button" class="btn" id="cancel">Cancelar</button><button class="btn primary">Guardar</button></div>
+    </div>
+  </form>`;
+  const f = sheet.querySelector('#f');
+  for(const k of ['tipo','nombre','inicio','fecha','duracion','juicio','texto','notas']) f.elements[k].value = it[k] ?? '';
+  f.elements.puntos.value = (it.puntos||[]).join('\n');
+  const paintPrev = () => { const p = sheet.querySelector('#prev'); p.style.setProperty('--lc', `var(--${f.elements.tipo.value})`); p.innerHTML = bubbleHTML({nombre: f.elements.nombre.value || 'nuevo', imagen: img}); };
+  paintPrev();
+  f.elements.nombre.oninput = paintPrev; f.elements.tipo.onchange = paintPrev;
+  sheet.querySelector('#fimg').onchange = async e => {
+    const file = e.target.files[0]; if(!file) return;
+    try{ img = await resize(file, 900); paintPrev(); }catch(err){ toast('No se pudo leer la imagen'); }
+  };
+  sheet.querySelector('#rmimg').onclick = () => { img=''; paintPrev(); };
+  sheet.querySelector('#cancel').onclick = () => dlg.close();
+  sheet.querySelector('.close').onclick = () => dlg.close();
+  const del = sheet.querySelector('#del');
+  if(del) del.onclick = async () => {
+    if(!confirm(`¿Eliminar "${it.nombre}"?`)) return;
+    data.items = data.items.filter(x=>x.id!==it.id);
+    data.deleted = [...new Set([...(data.deleted||[]), it.id])];
+    await save(); refresh(); dlg.close();
+  };
+  f.onsubmit = async e => {
+    e.preventDefault();
+    const v = k => f.elements[k].value.trim();
+    Object.assign(it, {tipo:v('tipo'), nombre:v('nombre'), inicio:Number(v('inicio')), duracion:v('duracion'),
+      juicio:v('juicio'), texto:v('texto'), notas:f.elements.notas.value.trim(),
+      puntos: f.elements.puntos.value.split('\n').map(s=>s.trim()).filter(Boolean)});
+    it.fecha = v('fecha') || `${it.inicio} a.C.`;
+    if(img) it.imagen = img; else delete it.imagen;
+    if(isNew) data.items.push(it); else data.items[data.items.findIndex(x=>x.id===it.id)] = it;
+    await save(); refresh(); dlg.close();
+  };
+  if(!dlg.open) dlg.showModal();
+  sheet.scrollTop = 0;
+}
+
+function resize(file, max){
+  return new Promise((res, rej) => {
+    const url = URL.createObjectURL(file), im = new Image();
+    im.onload = () => {
+      const s = Math.min(1, max / Math.max(im.width, im.height));
+      const c = document.createElement('canvas'); c.width = Math.round(im.width*s); c.height = Math.round(im.height*s);
+      c.getContext('2d').drawImage(im, 0, 0, c.width, c.height);
+      URL.revokeObjectURL(url);
+      res(c.toDataURL(file.type === 'image/png' ? 'image/png' : 'image/jpeg', 0.88));
+    };
+    im.onerror = () => { URL.revokeObjectURL(url); rej(); };
+    im.src = url;
+  });
+}
+function download(name, text, type){
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([text], {type})); a.download = name;
+  document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href), 2000);
+}
+const stamp = () => new Date().toISOString().slice(0,10);
+$('#btnAdd').onclick = () => showForm(null);
+$('#btnExport').onclick = () => download(`linea-tiempo-datos-${stamp()}.json`, JSON.stringify(data, null, 1), 'application/json');
+$('#btnImport').onclick = () => $('#importFile').click();
+$('#importFile').onchange = async e => {
+  const file = e.target.files[0]; if(!file) return;
+  try{ const d = JSON.parse(await file.text()); if(!Array.isArray(d.items)) throw 0;
+    data = d; await save(); refresh(); toast('Datos importados'); }
+  catch(err){ toast('Archivo no válido'); }
+  e.target.value = '';
+};
+$('#btnDownload').onclick = () => {
+  const json = JSON.stringify(data).replace(/</g, '\\u003c');
+  const html = ORIGINAL_HTML.replace(/(<script id="seed" type="application\/json">)[\s\S]*?(<\/script>)/, (m,a,b) => a + '\n' + json + '\n' + b);
+  download('linea-del-tiempo.html', html, 'text/html');
+  toast('Página descargada');
+};
+$('#btnReset').onclick = async () => {
+  if(!confirm('¿Borrar todos los cambios e ilustraciones y volver a los datos originales? Exportá antes una copia si querés conservarlos.')) return;
+  await DB.del('data'); data = structuredClone(SEED); refresh(); toast('Datos restaurados');
+};
+let tt; function toast(m){ const t=$('#toast'); t.textContent=m; t.classList.add('on'); clearTimeout(tt); tt=setTimeout(()=>t.classList.remove('on'),2200); }
+
+function refresh(){ const s = scroller.scrollLeft; render(); stats(); scroller.scrollLeft = s; }
+let lastM = innerWidth < 700, rt;
+addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { if((innerWidth < 700) !== lastM){ lastM = innerWidth < 700; refresh(); } else updateNow(); }, 150); });
+
+/* ---------- Init ---------- */
+(async () => {
+  const stored = await DB.get('data');
+  if(stored && Array.isArray(stored.items) && (stored.updatedAt||0) >= (SEED.updatedAt||0)){
+    data = stored;
+    // Sumar elementos nuevos del original que todavía no estén (sin revivir los eliminados)
+    const have = new Set(data.items.map(i=>i.id)), gone = new Set(data.deleted||[]);
+    SEED.items.forEach(i => { if(!have.has(i.id) && !gone.has(i.id)) data.items.push(structuredClone(i)); });
+  }
+  setAdmin(location.hash === '#admin');
+  render(); stats();
+})();
+})();
+</script>
+</body>
+</html>

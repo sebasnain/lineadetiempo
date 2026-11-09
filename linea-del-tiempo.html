@@ -110,10 +110,10 @@ nav a:hover{color:#fff}
 .cap{stroke-width:3}
 
 .card{position:absolute;display:flex;align-items:center;gap:12px;background:var(--s2);border:1px solid var(--bd);border-radius:20px;padding:10px 14px 10px 10px;
-  cursor:pointer;transition:transform .28s cubic-bezier(.3,.7,.3,1.2),box-shadow .28s;box-shadow:0 0 0 rgba(0,0,0,0);z-index:2;outline:none;
-  --lc:var(--or)}
+  cursor:pointer;transform:scale(calc(var(--s,1) * var(--h,1)));transition:transform .22s cubic-bezier(.2,.7,.3,1.15),box-shadow .28s;
+  box-shadow:0 0 0 rgba(0,0,0,0);z-index:var(--z,2);outline:none;--lc:var(--or)}
 .card.k-unido{--lc:var(--unido)} .card.k-norte{--lc:var(--norte)} .card.k-sur{--lc:var(--sur)}
-.card:hover,.card:focus-visible{transform:scale(1.07);z-index:6;
+.card:hover,.card:focus-visible{--h:1.07;z-index:40;
   box-shadow:0 0 0 1px color-mix(in srgb,var(--lc) 60%,transparent),0 0 34px -4px color-mix(in srgb,var(--lc) 70%,transparent),0 24px 50px -16px color-mix(in srgb,var(--lc) 80%,transparent)}
 .bub{position:relative;flex:none;width:var(--bs);height:var(--bs);border-radius:50%;padding:3px;background:conic-gradient(from 200deg,var(--lc),color-mix(in srgb,var(--lc) 25%,#000),var(--lc))}
 .bub .img{width:100%;height:100%;border-radius:50%;overflow:hidden;background:#0f0f0f;display:grid;place-items:center}
@@ -126,9 +126,10 @@ nav a:hover{color:#fff}
 .mt{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .jd{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:5px;vertical-align:1px}
 
-.evp{position:absolute;display:flex;align-items:center;gap:10px;padding:8px 14px 8px 10px;border-radius:999px;cursor:pointer;z-index:3;
-  background:linear-gradient(135deg,#2a0f09,#1b0d0a);border:1px solid #5b2216;transition:transform .28s cubic-bezier(.3,.7,.3,1.2),box-shadow .28s;outline:none}
-.evp:hover,.evp:focus-visible{transform:scale(1.07);z-index:6;box-shadow:0 0 0 1px rgba(255,61,46,.6),0 0 34px -4px rgba(255,61,46,.7),0 20px 40px -14px rgba(255,61,46,.8)}
+.evp{position:absolute;display:flex;align-items:center;gap:10px;padding:8px 14px 8px 10px;border-radius:999px;cursor:pointer;z-index:var(--z,3);
+  transform:scale(calc(var(--s,1) * var(--h,1)));
+  background:linear-gradient(135deg,#2a0f09,#1b0d0a);border:1px solid #5b2216;transition:transform .22s cubic-bezier(.2,.7,.3,1.15),box-shadow .28s;outline:none}
+.evp:hover,.evp:focus-visible{--h:1.07;z-index:40;box-shadow:0 0 0 1px rgba(255,61,46,.6),0 0 34px -4px rgba(255,61,46,.7),0 20px 40px -14px rgba(255,61,46,.8)}
 .evp .pulse{flex:none;width:34px;height:34px;border-radius:50%;background:radial-gradient(circle,var(--evento) 0 30%,rgba(255,61,46,.25) 31% 100%);animation:pulse 2.4s infinite}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,61,46,.45)}50%{box-shadow:0 0 0 8px rgba(255,61,46,0)}}
 .evp b{display:block;font-size:12px;color:#ff8a70;font-weight:800}
@@ -375,10 +376,13 @@ function bubbleHTML(it){
 /* ---------- Layout ---------- */
 function makeLayout(){
   const M = innerWidth < 700;
-  const l = {M, CW:M?182:226, CH:M?78:90, BS:M?54:64, GAP:M?12:18, STEM:M?26:34, BAND:M?132:150, PX:M?12:15, UPX:M?3.4:4.4, X0:M?92:130, SPLIT:M?160:230, EW:M?186:214, EH:52};
-  l.T1 = 22; l.T0 = l.T1 + l.CH + 14; l.NY = l.T0 + l.CH + l.STEM;
+  // CW/CH = tamaño completo (al acercarse). K = escala en reposo; el layout usa el tamaño chico (cw/ch).
+  const l = {M, K:M?.62:.56, CW:M?182:226, CH:M?78:90, BS:M?54:64, GAP:M?8:10, STEM:M?20:24, BAND:M?104:112, PX:M?8:9, UPX:M?2.4:2.8, X0:M?92:130, SPLIT:M?120:150, EW:M?186:214, EH:52, R:M?150:190};
+  l.cw = l.CW*l.K; l.ch = l.CH*l.K; l.ew = l.EW*l.K; l.eh = l.EH*l.K;
+  const grow = l.CH - l.ch;   // espacio para que las tarjetas crezcan sin cortarse
+  l.T1 = 14 + grow; l.T0 = l.T1 + l.ch + 10; l.NY = l.T0 + l.ch + l.STEM;
   l.MY = l.NY + l.BAND/2; l.SY = l.NY + l.BAND;
-  l.S0 = l.SY + l.STEM; l.S1 = l.S0 + l.CH + 14; l.RY = l.S1 + l.CH + 40; l.H = l.RY + 30;
+  l.S0 = l.SY + l.STEM; l.S1 = l.S0 + l.ch + 10; l.RY = l.S1 + l.ch + grow + 26; l.H = l.RY + 30;
   const years = data.items.map(i=>i.inicio).filter(Number.isFinite);
   l.U0 = Math.max(1050, ...years); l.END = Math.min(586, ...years);
   l.xu = y => l.X0 + (l.U0 - y) * l.UPX;
@@ -398,7 +402,7 @@ function render(){
 
   // Place items (greedy, two tiers per lane so cards never overlap)
   const tiers = {
-    unido:[{top:L.MY-L.STEM-L.CH, line:L.MY, edge:'b'},{top:L.MY+L.STEM, line:L.MY, edge:'t'}],
+    unido:[{top:L.MY-L.STEM-L.ch, line:L.MY, edge:'b'},{top:L.MY+L.STEM, line:L.MY, edge:'t'}],
     norte:[{top:L.T0, line:L.NY, edge:'b'},{top:L.T1, line:L.NY, edge:'b'}],
     sur:[{top:L.S0, line:L.SY, edge:'t'},{top:L.S1, line:L.SY, edge:'t'}],
   };
@@ -408,22 +412,22 @@ function render(){
   for(const it of ordered){
     const x = L.xOf(it);
     if(it.tipo === 'evento'){
-      const left = Math.max(x - L.EW/2, right.evento[0] + L.GAP);
-      right.evento[0] = left + L.EW;
-      placed.push({it, x, left, top:L.MY - L.EH/2, ev:true});
-      maxX = Math.max(maxX, left + L.EW);
+      const left = Math.max(x - L.ew/2, right.evento[0] + L.GAP);
+      right.evento[0] = left + L.ew;
+      placed.push({it, x, left, ev:true});
+      maxX = Math.max(maxX, left + L.ew);
       continue;
     }
     const lane = tiers[it.tipo] ? it.tipo : 'sur';
-    const ideal = x - L.CW*0.22;
+    const ideal = x - L.cw*0.22;
     const c0 = Math.max(ideal, right[lane][0] + L.GAP), c1 = Math.max(ideal, right[lane][1] + L.GAP);
     const t = c0 <= c1 + 4 ? 0 : 1;
     const left = t ? c1 : c0;
-    right[lane][t] = left + L.CW;
+    right[lane][t] = left + L.cw;
     placed.push({it, x, left, lane, tier:tiers[lane][t]});
-    maxX = Math.max(maxX, left + L.CW);
+    maxX = Math.max(maxX, left + L.cw);
   }
-  const W = maxX + (L.M ? 80 : 200);
+  const W = maxX + (L.M ? 120 : 220);
   stage.style.width = W + 'px'; stage.style.height = L.H + 'px';
 
   // SVG
@@ -493,20 +497,24 @@ function render(){
         if(it.inicio < 931) el('circle', {cx:p.x, cy:L.SY, r:5, class:'dot on', style:'--lc:var(--evento);stroke:var(--evento)', 'data-id':it.id}, svg);
         if(y1 === L.NY) el('circle', {cx:p.x, cy:L.NY, r:5, class:'dot on', style:'--lc:var(--evento);stroke:var(--evento)', 'data-id':it.id}, svg);
       }
-      if(p.left > p.x - L.EW/2 + 2) el('path', {d:`M${p.x} ${L.MY} H${p.left+20}`, class:'conn', style:'--lc:var(--evento)', 'data-id':it.id}, connG);
+      if(p.left > p.x - L.ew/2 + 2) el('path', {d:`M${p.x} ${L.MY} H${p.left+12}`, class:'conn', style:'--lc:var(--evento)', 'data-id':it.id}, connG);
       node = document.createElement('div');
       node.className = 'evp';
-      node.style.cssText = `left:${p.left}px;top:${p.top}px;width:${L.EW}px;height:${L.EH}px`;
+      node.style.cssText = `left:${p.left + L.ew/2 - L.EW/2}px;top:${L.MY - L.EH/2}px;width:${L.EW}px;height:${L.EH}px;transform-origin:50% 50%`;
+      node.dataset.cx = p.left + L.ew/2;
       node.innerHTML = `<span class="pulse"></span><div style="min-width:0"><b>${esc(it.fecha)}</b><span class="et">${esc(it.nombre)}</span></div><span class="admin-edit">editar</span>`;
     } else {
-      const tr = p.tier, edgeY = tr.edge==='b' ? tr.top + L.CH : tr.top;
-      const ax = Math.max(p.left + 30, Math.min(p.x, p.left + L.CW - 30));
+      const tr = p.tier, edgeY = tr.edge==='b' ? tr.top + L.ch : tr.top;
+      const ax = Math.max(p.left + 18, Math.min(p.x, p.left + L.cw - 18));
       const my = (tr.line + edgeY)/2;
       el('path', {d:`M${p.x} ${tr.line} C${p.x} ${my} ${ax} ${my} ${ax} ${edgeY}`, class:'conn', style:`--lc:var(--${p.lane})`, 'data-id':it.id}, connG);
       el('circle', {cx:p.x, cy:tr.line, r:5, class:'dot', style:`--lc:var(--${p.lane});stroke:var(--${p.lane})`, 'data-id':it.id}, svg);
       node = document.createElement('div');
       node.className = 'card k-' + p.lane;
-      node.style.cssText = `left:${p.left}px;top:${tr.top}px;width:${L.CW}px;height:${L.CH}px`;
+      // El elemento tiene el tamaño completo; en reposo se achica (escala K) hacia el lado de la línea
+      const domTop = tr.edge==='b' ? tr.top + L.ch - L.CH : tr.top;
+      node.style.cssText = `left:${p.left + L.cw/2 - L.CW/2}px;top:${domTop}px;width:${L.CW}px;height:${L.CH}px;transform-origin:50% ${tr.edge==='b'?'100%':'0'}`;
+      node.dataset.cx = p.left + L.cw/2;
       node.innerHTML = `${bubbleHTML(it)}<div class="ct"><span class="no">#${pad(nums[it.id])}</span><h3>${esc(it.nombre)}</h3>
         <div class="mt">${esc(it.fecha)}</div>
         <div class="mt">${it.juicio?`<i class="jd" style="background:var(--${it.juicio})" title="${JUICIO[it.juicio]}"></i>`:''}${esc(it.duracion||'')}</div></div><span class="admin-edit">editar</span>`;
@@ -517,11 +525,35 @@ function render(){
   }
 
   // Spotlight follows the mouse along the lines
-  stage.onpointermove = e => { const r = stage.getBoundingClientRect(); spotC.setAttribute('cx', e.clientX - r.left); spotC.setAttribute('cy', e.clientY - r.top); };
+  stage.onpointermove = e => {
+    const r = stage.getBoundingClientRect();
+    spotC.setAttribute('cx', e.clientX - r.left); spotC.setAttribute('cy', e.clientY - r.top);
+    if(e.pointerType === 'mouse') lens(e.clientX - r.left);
+  };
   stage.onpointerenter = () => stage.classList.add('hover');
-  stage.onpointerleave = () => stage.classList.remove('hover');
+  stage.onpointerleave = e => { stage.classList.remove('hover'); if(e.pointerType === 'mouse') lens(null); };
+  lensNodes = [...stage.querySelectorAll('.card,.evp')].map(n => ({n, cx:parseFloat(n.dataset.cx)}));
+  lens(TOUCH ? centerX() : null, true);
   applyFilter();
   updateNow();
+}
+
+/* ---------- Efecto lupa: las tarjetas crecen al acercarse ---------- */
+const TOUCH = matchMedia('(hover: none)').matches;
+let lensNodes = [], lensX = null, lensRaf = 0;
+const centerX = () => scroller.scrollLeft + scroller.clientWidth/2;
+function lens(x, now){
+  lensX = x;
+  if(now){ applyLens(); return; }
+  if(!lensRaf) lensRaf = requestAnimationFrame(applyLens);
+}
+function applyLens(){
+  lensRaf = 0;
+  for(const {n, cx} of lensNodes){
+    const f = lensX == null ? 0 : Math.exp(-(((cx - lensX) / L.R) ** 2));
+    n.style.setProperty('--s', (L.K + (1 - L.K) * f).toFixed(3));
+    n.style.setProperty('--z', 2 + Math.round(f * 10));
+  }
 }
 
 /* ---------- Hover: light the lane, connector and dot ---------- */
@@ -568,7 +600,7 @@ function updateNow(){
   $('#nowYear').textContent = (yr===931 ? '931' : '≈ ' + yr) + ' a.C.';
   $('#nowEra').textContent = yr > 931 ? 'Reino Unido' : yr > 722 ? 'Reino dividido' : yr > 606 ? 'Judá solo' : 'Deportaciones';
 }
-scroller.addEventListener('scroll', updateNow, {passive:true});
+scroller.addEventListener('scroll', () => { updateNow(); if(TOUCH) lens(centerX()); }, {passive:true});
 scroller.addEventListener('wheel', e => {
   if(Math.abs(e.deltaY) <= Math.abs(e.deltaX) || e.shiftKey) return;
   const max = scroller.scrollWidth - scroller.clientWidth;

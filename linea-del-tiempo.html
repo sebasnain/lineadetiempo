@@ -139,6 +139,23 @@ nav a:hover{color:#fff}
 
 .admin-edit{position:absolute;top:-9px;right:10px;display:none;background:var(--or);color:#fff;border-radius:999px;padding:1px 9px;font-size:10.5px;font-weight:700}
 body.admin .admin-edit{display:block}
+.more{position:absolute;right:10px;bottom:9px;display:none;align-items:center;gap:4px;background:var(--lc);color:#111;border-radius:999px;padding:2px 9px;font-size:10.5px;font-weight:800;cursor:pointer;transition:transform .15s,box-shadow .15s}
+.more:hover{transform:scale(1.08);box-shadow:0 0 16px -2px var(--lc)}
+.more.has,body.admin .more{display:inline-flex}
+body.admin .more:not(.has){background:transparent;color:var(--lc);border:1px dashed var(--lc)}
+.evp .more{--lc:var(--evento);right:auto;left:50%;bottom:-11px;transform:translateX(-50%)}
+.evp .more:hover{transform:translateX(-50%) scale(1.08)}
+.story-btn{display:flex;width:100%;align-items:center;justify-content:space-between;gap:10px;margin-top:20px;padding:14px 18px;border-radius:16px;cursor:pointer;
+  background:var(--lc);color:#111;border:none;font-weight:800;font-size:15px;transition:box-shadow .2s}
+.story-btn:hover{box-shadow:0 0 30px -6px var(--lc)}
+.story-btn .pm{width:26px;height:26px;border-radius:50%;background:#111;color:var(--lc);display:grid;place-items:center;font-size:16px;transition:transform .3s}
+.story-btn[aria-expanded="true"] .pm{transform:rotate(45deg)}
+.story{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s ease}
+.story.open{grid-template-rows:1fr}
+.story>div{overflow:hidden}
+.story-in{padding:18px 4px 4px;font-size:15px;line-height:1.7;color:#e8e2dc}
+.story-in p{margin:0 0 14px}
+.story-in p:first-child::first-letter{font-size:2.6em;font-weight:800;float:left;line-height:.9;margin:6px 8px 0 0;color:var(--lc)}
 
 .tl-bar{display:flex;align-items:center;gap:16px;margin:18px auto 0}
 .round{width:44px;height:44px;border-radius:50%;border:1px solid var(--bd);background:var(--s1);cursor:pointer;font-size:18px;transition:.2s;flex:none}
@@ -502,7 +519,7 @@ function render(){
       node.className = 'evp';
       node.style.cssText = `left:${p.left + L.ew/2 - L.EW/2}px;top:${L.MY - L.EH/2}px;width:${L.EW}px;height:${L.EH}px;transform-origin:50% 50%`;
       node.dataset.cx = p.left + L.ew/2;
-      node.innerHTML = `<span class="pulse"></span><div style="min-width:0"><b>${esc(it.fecha)}</b><span class="et">${esc(it.nombre)}</span></div><span class="admin-edit">editar</span>`;
+      node.innerHTML = `<span class="pulse"></span><div style="min-width:0"><b>${esc(it.fecha)}</b><span class="et">${esc(it.nombre)}</span></div><span class="admin-edit">editar</span>${moreHTML(it)}`;
     } else {
       const tr = p.tier, edgeY = tr.edge==='b' ? tr.top + L.ch : tr.top;
       const ax = Math.max(p.left + 18, Math.min(p.x, p.left + L.cw - 18));
@@ -517,7 +534,7 @@ function render(){
       node.dataset.cx = p.left + L.cw/2;
       node.innerHTML = `${bubbleHTML(it)}<div class="ct"><span class="no">#${pad(nums[it.id])}</span><h3>${esc(it.nombre)}</h3>
         <div class="mt">${esc(it.fecha)}</div>
-        <div class="mt">${it.juicio?`<i class="jd" style="background:var(--${it.juicio})" title="${JUICIO[it.juicio]}"></i>`:''}${esc(it.duracion||'')}</div></div><span class="admin-edit">editar</span>`;
+        <div class="mt">${it.juicio?`<i class="jd" style="background:var(--${it.juicio})" title="${JUICIO[it.juicio]}"></i>`:''}${esc(it.duracion||'')}</div></div><span class="admin-edit">editar</span>${moreHTML(it)}`;
     }
     node.dataset.id = it.id; node.dataset.lane = p.ev ? 'evento' : p.lane;
     node.tabIndex = 0; node.setAttribute('role','button'); node.setAttribute('aria-label', `${it.nombre}, ${it.fecha}`);
@@ -571,7 +588,7 @@ stage.addEventListener('focusout', e => { const n = e.target.closest('.card,.evp
 function matches(it){
   const q = query.trim().toLowerCase();
   return (filtro==='todos' || it.tipo===filtro) &&
-    (!q || [it.nombre,it.fecha,it.texto,it.notas,...(it.puntos||[])].join(' ').toLowerCase().includes(q));
+    (!q || [it.nombre,it.fecha,it.texto,it.notas,it.historia,...(it.puntos||[])].join(' ').toLowerCase().includes(q));
 }
 function applyFilter(){
   const q = query.trim();
@@ -631,7 +648,7 @@ document.querySelectorAll('[data-jump]').forEach(a => a.onclick = () => {
   const t = a.dataset.jump; if(t==='top') scrollTo({top:0, behavior:'smooth'}); else $('#'+t).scrollIntoView({behavior:'smooth'});
 });
 
-stage.addEventListener('click', e => { if(dragged) return; const n = e.target.closest('.card,.evp'); n && openItem(n.dataset.id); });
+stage.addEventListener('click', e => { if(dragged) return; const n = e.target.closest('.card,.evp'); n && openItem(n.dataset.id, !!e.target.closest('.more')); });
 stage.addEventListener('keydown', e => { if((e.key==='Enter'||e.key===' ') && e.target.matches('.card,.evp')){ e.preventDefault(); openItem(e.target.dataset.id); } });
 
 function stats(){
@@ -644,10 +661,19 @@ function stats(){
     <div class="stat"><i style="background:var(--evento)"></i><div>${deps} deportaciones<small>A Babilonia</small></div></div>`;
 }
 
-function openItem(id){ isAdmin() ? showForm(id) : showDetail(id); }
+function openItem(id, more){ isAdmin() ? showForm(id, more) : showDetail(id, more); }
+
+/* ---------- "Más": desarrollo ampliado de la historia ---------- */
+function moreHTML(it){
+  const has = !!(it.historia && it.historia.trim());
+  return `<span class="more${has?' has':''}" title="${has?'Leer más de la historia':'Agregar más historia'}">Más +</span>`;
+}
+function storyHTML(txt){
+  return txt.trim().split(/\n\s*\n/).map(p => `<p>${esc(p.trim()).replace(/\n/g,'<br>')}</p>`).join('');
+}
 
 /* ---------- Detail ---------- */
-function showDetail(id){
+function showDetail(id, openMore){
   const it = data.items.find(x=>x.id===id); if(!it) return;
   const list = ordered.filter(matches);
   const idx = list.findIndex(x=>x.id===id), prev = list[idx-1], next = list[idx+1];
@@ -668,6 +694,9 @@ function showDetail(id){
       </div>
       ${(it.puntos&&it.puntos.length)?`<ol class="pts">${it.puntos.map(p=>`<li><span>${esc(p)}</span></li>`).join('')}</ol>`:''}
       ${it.notas?`<div class="notes"><b>Notas</b>${esc(it.notas)}</div>`:''}
+      ${it.historia && it.historia.trim() ? `
+      <button class="story-btn" aria-expanded="false" aria-controls="story">Más sobre ${esc(it.nombre)} <span class="pm">+</span></button>
+      <div class="story" id="story"><div><div class="story-in">${storyHTML(it.historia)}</div></div></div>` : ''}
     </div>
   </div>
   <div class="nav">
@@ -676,8 +705,13 @@ function showDetail(id){
   </div>`;
   sheet.querySelector('.close').onclick = () => dlg.close();
   sheet.querySelectorAll('[data-go]').forEach(b => b.onclick = () => showDetail(b.dataset.go));
+  const sb = sheet.querySelector('.story-btn'), st = sheet.querySelector('.story');
+  const toggleStory = open => { sb.setAttribute('aria-expanded', open); st.classList.toggle('open', open); };
+  if(sb) sb.onclick = () => { const open = sb.getAttribute('aria-expanded') !== 'true'; toggleStory(open);
+    if(open) setTimeout(() => sb.scrollIntoView({behavior:'smooth', block:'start'}), 60); };
   if(!dlg.open) dlg.showModal();
   sheet.scrollTop = 0;
+  if(sb && openMore){ toggleStory(true); setTimeout(() => sb.scrollIntoView({behavior:'smooth', block:'start'}), 120); }
   const n = stage.querySelector(`[data-id="${CSS.escape(id)}"].card, [data-id="${CSS.escape(id)}"].evp`);
   if(n) scrollToX(parseFloat(n.style.left), .35);
 }
@@ -706,7 +740,7 @@ $('#adminLink').onclick = () => { setAdmin(true); scrollTo({top:0, behavior:'smo
 $('#btnExit').onclick = () => setAdmin(false);
 window.addEventListener('hashchange', () => setAdmin(location.hash==='#admin'));
 
-function showForm(id){
+function showForm(id, focusMore){
   const isNew = !id;
   const it = isNew ? {id:'i'+Date.now().toString(36), tipo:'sur', nombre:'', inicio:'', fecha:'', duracion:'', texto:'', puntos:[], notas:'', juicio:''}
                    : structuredClone(data.items.find(x=>x.id===id));
@@ -736,13 +770,14 @@ function showForm(id){
     <div class="field"><label>Texto bíblico</label><input name="texto" placeholder="1 Reyes 11:26—14:20"></div>
     <div class="field"><label>Puntos (uno por línea)</label><textarea name="puntos" rows="6"></textarea></div>
     <div class="field"><label>Notas personales</label><textarea name="notas" rows="3"></textarea></div>
+    <div class="field"><label>Más — desarrollo de la historia (opcional; dejá una línea en blanco entre párrafos)</label><textarea name="historia" rows="10" placeholder="Escribí acá la historia ampliada. Si lo dejás vacío, el botón «Más» no aparece en la página."></textarea></div>
     <div class="actions">
       ${isNew?'<span></span>':'<button type="button" class="btn danger" id="del">Eliminar</button>'}
       <div style="display:flex;gap:8px"><button type="button" class="btn" id="cancel">Cancelar</button><button class="btn primary">Guardar</button></div>
     </div>
   </form>`;
   const f = sheet.querySelector('#f');
-  for(const k of ['tipo','nombre','inicio','fecha','duracion','juicio','texto','notas']) f.elements[k].value = it[k] ?? '';
+  for(const k of ['tipo','nombre','inicio','fecha','duracion','juicio','texto','notas','historia']) f.elements[k].value = it[k] ?? '';
   f.elements.puntos.value = (it.puntos||[]).join('\n');
   const paintPrev = () => { const p = sheet.querySelector('#prev'); p.style.setProperty('--lc', `var(--${f.elements.tipo.value})`); p.innerHTML = bubbleHTML({nombre: f.elements.nombre.value || 'nuevo', imagen: img}); };
   paintPrev();
@@ -765,7 +800,7 @@ function showForm(id){
     e.preventDefault();
     const v = k => f.elements[k].value.trim();
     Object.assign(it, {tipo:v('tipo'), nombre:v('nombre'), inicio:Number(v('inicio')), duracion:v('duracion'),
-      juicio:v('juicio'), texto:v('texto'), notas:f.elements.notas.value.trim(),
+      juicio:v('juicio'), texto:v('texto'), notas:f.elements.notas.value.trim(), historia:f.elements.historia.value.trim(),
       puntos: f.elements.puntos.value.split('\n').map(s=>s.trim()).filter(Boolean)});
     it.fecha = v('fecha') || `${it.inicio} a.C.`;
     if(img) it.imagen = img; else delete it.imagen;
@@ -774,6 +809,7 @@ function showForm(id){
   };
   if(!dlg.open) dlg.showModal();
   sheet.scrollTop = 0;
+  if(focusMore){ const h = f.elements.historia; h.scrollIntoView({block:'center'}); h.focus(); }
 }
 
 function resize(file, max){
